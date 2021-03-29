@@ -12,3 +12,11 @@
 * /user/photo: This page will show user's photo
 * /user/friend: This page will show user's friend
 * /user/profile: This page will show user's profile
+
+### Process using git to push code
+* Step 1: After pull code from master to your desktop
+* Step 2: Create a new branch with command "git branch [your new branch]". (Ex: git branch ledutu)
+* Step 3: Go to that branch already created by using command "git checkout [your already created branch]"
+* Step 4: Code in that branch
+* Step 5: When you finish 1 task. Then push code in that branch to git
+* Step 6: Create a new pull request to master. Done.
