@@ -3,7 +3,8 @@
 ### Project running process
 * Step 1: Clone project by git clone https://github.com/ledutu/tdtu-social-media.git
 * Step 2: cd to project folder and run npm install
-* step 3: Run project by npm start
+* Step 3: Run project by npm start
+* Step 4: Open chrome and enter http://localhost:3000/
    
 ### Page detail
 * /home: This page will show timeline of web
