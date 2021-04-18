@@ -2646,6 +2646,11 @@ textarea:focus {
   }
 }
 
+.tdt-logo-image {
+  height: 50px;
+  width: 60px;
+}
+
 @media only screen and (max-width: 479.98px) {
   .timeline-bg-content .timeline-bg-title {
     width: 100%;
