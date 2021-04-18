@@ -10,6 +10,7 @@ var homeRouter = require('./src/routes/home');
 var authRouter = require('./src/routes/auth');
 var userRouter = require('./src/routes/users');
 
+
 //admin
 var adminRouter = require('./src/routes/admin');
 
@@ -29,6 +30,7 @@ i18n.configure({
   locales: ['en', 'vi'],
   directory: __dirname + '/src/locales',
   cookie: 'lang',
+  objectNotation: true
 });
 
 //Connect to mongoDB
