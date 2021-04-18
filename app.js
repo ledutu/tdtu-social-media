@@ -29,6 +29,7 @@ i18n.configure({
   locales: ['en', 'vi'],
   directory: __dirname + '/src/locales',
   cookie: 'lang',
+  objectNotation: true 
 });
 
 //Connect to mongoDB
