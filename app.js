@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var i18n = require("i18n");
+var mongoose = require('mongoose');
 
 var homeRouter = require('./src/routes/home');
 var authRouter = require('./src/routes/auth');
@@ -29,6 +30,19 @@ i18n.configure({
   directory: __dirname + '/src/locales',
   cookie: 'lang',
 });
+
+//Connect to mongoDB
+mongoose.connect("mongodb://localhost:27017/tdt_social_media", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+}).then(() => {
+  console.log('Database connected');
+}).catch((error) => {
+  console.log(error);
+  console.log('Error connecting to database');
+});
+
 
 //Home
 app.use('/', homeRouter);
