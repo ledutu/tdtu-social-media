@@ -1,10 +1,11 @@
-const Comment = required('./comment.js');
-const Favourite = required('./favourite.js');
-const Notification = required('./notification.js');
-const NotificationCategory = required('./notification-category.js');
-const PostCategory = required('./post-category.js');
-const Post = required('./post.js');
-const UserRole = required('./user-role.js');
+const Comment = require('./comment');
+const Favourite = require('./favourite.js');
+const Notification = require('./notification.js');
+const NotificationCategory = require('./notification-category.js');
+const PostCategory = require('./post-category.js');
+const Post = require('./post.js');
+const UserRole = require('./user-role.js');
+const User = require('./user.js');
 
 module.exports = {
     Comment,
@@ -14,4 +15,5 @@ module.exports = {
     PostCategory,
     Post,
     UserRole,
+    User,
 }

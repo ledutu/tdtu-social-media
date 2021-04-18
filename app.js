@@ -10,6 +10,7 @@ var homeRouter = require('./src/routes/home');
 var authRouter = require('./src/routes/auth');
 var userRouter = require('./src/routes/users');
 
+
 //admin
 var adminRouter = require('./src/routes/admin');
 
