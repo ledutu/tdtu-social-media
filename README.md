@@ -21,3 +21,8 @@
 * Step 4: Code in that branch
 * Step 5: When you finish 1 task. Then push code in that branch to git
 * Step 6: Create a new pull request to master. Done.
+
+### Process push into git
+* Step 1: git add . (add all file into local)
+* Step 2: git commit -m "<your message>" (commit into your local with a message) 
+* Step 3: git push (push to server). if first time you push, you must use this command git push --set-upstream origin <your branch>
