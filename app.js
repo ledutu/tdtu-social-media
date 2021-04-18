@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var i18n = require("i18n");
 
 var homeRouter = require('./src/routes/home');
 var authRouter = require('./src/routes/auth');
@@ -19,6 +20,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/src/public')));
+app.use(i18n.init);
+i18n.configure({
+  locales: ['en', 'vi'],
+  directory: __dirname + '/src/locales',
+  cookie: 'lang',
+});
 
 //Home
 app.use('/', homeRouter);
@@ -30,12 +37,12 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
-}); 
+});
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
