@@ -9,6 +9,9 @@ var homeRouter = require('./src/routes/home');
 var authRouter = require('./src/routes/auth');
 var userRouter = require('./src/routes/users');
 
+//admin
+var adminRouter = require('./src/routes/admin');
+
 var app = express();
 
 // view engine setup
@@ -35,6 +38,9 @@ app.use('/auth', authRouter);
 
 //Profile
 app.use('/user', userRouter);
+
+//Admin home
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
