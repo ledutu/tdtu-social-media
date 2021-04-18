@@ -1,5 +1,10 @@
 {
-    "home": "Home",
-    "message": "Messaage",
-    "notification": "Notification"
+	"home": "Trang chủ",
+	"message": "Tin nhắn",
+	"notification": "Thông báo",
+	"auth": {
+		"login": "Đăng nhập",
+		"logingg": "Đăng nhập bằng Google"
+	}
+	
 }
