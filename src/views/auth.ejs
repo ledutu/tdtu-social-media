@@ -43,12 +43,12 @@
                         <div class="card sdfasfdsa">
                             <div class="card-body"> 
                                 <div class="login-form">
-                                    <h1>LOGIN</h1>
+                                    <h1><%=__('login')%></h1>
                                     <form action="auth" method="POST">
-                                        <input type="text" name="username" placeholder="Username" required>
-                                        <input type="password" name="password" placeholder="Password" required>
+                                        <input type="text" name="username" placeholder="<%=__('username')%>" required>
+                                        <input type="password" name="password" placeholder="<%=__('password')%>" required>
                                         <input type="submit">
-                                        <button class="button"><img src="/assets/images/logo/google.jpg" />Login with google</button>
+                                        <button class="button"><img src="/assets/images/logo/google.jpg" /><%=__('Logingoogle')%></button>
                                     </form>
                                 </div>
                             </div>
