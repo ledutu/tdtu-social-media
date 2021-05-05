@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Kode is a Premium Bootstrap Admin Template, It's responsive, clean coded and mobile friendly">
+        <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
+        <title>Home</title>
+
+        <!-- ========== Css Files ========== -->
+        <%- include('layouts/head') %>
+
+    </head>
+    <body>
+    <!-- Start Page Loading -->
+        <%- include('layouts/loading') %>
+        <!-- End Page Loading -->
+
+        <!-- START TOP -->
+        <%- include('layouts/header') %> 
+        <!-- END TOP -->
+
+        <!-- START SIDEBAR -->
+        <%- include('layouts/left-menu') %> 
+        <!-- END SIDEBAR -->
+
+        <!-- START CONTENT -->
+        <div class="content">
+
+            <!-- Start Page Header -->
+            <div class="page-header">
+                <h1 class="title">Dashboard</h1>
+                <ol class="breadcrumb">
+                    <li class="active">This is a quick overview of some features</li>
+                </ol>
+
+                <!-- Start Page Header Right Div -->
+                <div class="right">
+                <div class="btn-group" role="group" aria-label="...">
+                    <a href="index.html" class="btn btn-light">Dashboard</a>
+                    <a href="#" class="btn btn-light"><i class="fa fa-refresh"></i></a>
+                    <a href="#" class="btn btn-light"><i class="fa fa-search"></i></a>
+                    <a href="#" class="btn btn-light" id="topstats"><i class="fa fa-line-chart"></i></a>
+                </div>
+                </div>
+                <!-- End Page Header Right Div -->
+
+            </div>
+            <!-- End Page Header -->
+
+
+            <!-- START CONTAINER -->
+            <div class="container-widget">
+                <!-- Start Fifth Row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                
+                        <div class="panel-title">
+                            Striped rows
+                        </div>
+                
+                        <div class="panel-body table-responsive">
+                
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Order ID</td>
+                                        <td>Product</td>
+                                        <td>Buyer</td>
+                                        <td>Date</td>
+                                        <td>Order Note</td>
+                                        <td>Payment</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for( let index = 0; index < 10; index++ ) { %>
+                                    
+                                        <tr>
+                                            <td># <b>9652</b></td>
+                                            <td>Kode Gaming Laptop</td>
+                                            <td>John Doe</td>
+                                            <td>12/10/2015</td>
+                                            <td>As we got further and further away, it [the Earth] diminished in size.</td>
+                                            <td>Credit Card</td>
+                                        </tr>
+                                    <% } %>
+                                        
+                                </tbody>
+                            </table>
+                        </div>
+                
+                        </div>
+                    </div>
+                    <!-- End Panel -->
+
+                </div>
+                <!-- End Fifth Row -->
+
+            </div>
+            <!-- END CONTAINER -->
+
+        </div>
+        <!-- End Content -->
+
+        <%- include('layouts/javascript') %>
+
+    </body>
+</html>
