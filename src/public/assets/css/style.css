@@ -2614,7 +2614,7 @@ textarea:focus {
 
 @media only screen and (max-width: 575.98px) {
   .timeline-bg-content {
-    height: 300px;
+    height: 500px;
   }
 }
 
@@ -2644,6 +2644,11 @@ textarea:focus {
     padding: 0 30px;
     font-size: 26px;
   }
+}
+
+.tdt-logo-image {
+  height: 50px;
+  width: 60px;
 }
 
 @media only screen and (max-width: 479.98px) {

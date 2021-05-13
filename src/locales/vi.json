@@ -40,4 +40,10 @@
 	"relative":"Quan hệ",
 	"collage":"Cắt dán",
 	"request":"yêu cầu"
+	"notification": "Thông báo",
+	"auth":{
+		"login": "Đăng nhập",
+		"logingg": "Đăng nhập bằng Google"
+	}
+	
 }
