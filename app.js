@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var homeRouter = require('./src/routes/home');
 var authRouter = require('./src/routes/auth');
 var userRouter = require('./src/routes/users');
+var notificationRouter = require('./src/routes/notification');
 
 
 //admin
@@ -57,6 +58,7 @@ app.use('/user', userRouter);
 
 //Admin home
 app.use('/admin', adminRouter);
+app.use('/notification', notificationRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
