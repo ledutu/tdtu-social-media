@@ -5,7 +5,7 @@ const userRoleSchema = new Schema({
     id: { type: String, required: true, unique: true, index: true },
     name: { type: String, require: true },
     is_actived: { type: Boolean, default: true }
-});
+}, { timestamps: true });
 
 const UserRole = mongoose.model('user_role', userRoleSchema);
 

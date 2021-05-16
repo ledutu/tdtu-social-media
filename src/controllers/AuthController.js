@@ -1,27 +1,53 @@
 var express = require('express');
 const { User } = require('../models/user');
+const Helpers = require('../utils/helpers');
 
 async function index(request, response) {
     response.cookie('lang', 'vi', { maxAge: 900000 });
-    const user = {
-        username: 'admin',
-        password: 'admin123',
-        password_hash: '$2y$12$PUbG8DAEua73eQ8uXSUpRuURRpT9niOoxdOS8bbnuaRwtxfPeDmea',
-        full_name: 'ADMIN',
-        birthday: '02/01/1999',
-        email: 'admin@gmail.com',
-        student_id: '123123121212',
-        role: 1,
-        is_block: false,
+    response.render('auth');
+}
+
+function loginWithGoogle(request, response) {
+    response.redirect('/');
+}
+
+async function checkLoginWithGoogle(accessToken, refreshToken, profile, done) {
+
+    if (profile._json.email.split('@')[1] != "student.tdtu.edu.vn") {
+        return done(null, null);
     }
 
-    // const userModel = new User(user);
+    User.findOne({ googleId: profile.id }, async function (err, existUser) {
+        user = existUser;
+        if (!user) {
+            user = new User({
+                googleId: profile.id,
+                username: '',
+                password: '',
+                password_hash: '',
+                full_name: profile.displayName,
+                birthday: '',
+                email: profile._json.email,
+                student_id: profile._json.email.split('@')[0],
+                image: profile._json.picture,
+                role: 0,
+                is_block: false,
+            })
 
+            await user.save();
+        }
+        return done(null, user);
+    })
+}
 
-    console.log(user)
-    response.render('auth');
+function logout(request, response) {
+    request.logout();
+    response.redirect('/');
 }
 
 module.exports = {
     index,
+    loginWithGoogle,
+    checkLoginWithGoogle,
+    logout,
 }
