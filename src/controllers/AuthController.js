@@ -4,7 +4,8 @@ const Helpers = require('../utils/helpers');
 
 async function index(request, response) {
     response.cookie('lang', 'vi', { maxAge: 900000 });
-    response.render('auth');
+    request.toastr.success('Successfully logged in.', "You're in!");
+    response.render('auth', { request });
 }
 
 function loginWithGoogle(request, response) {

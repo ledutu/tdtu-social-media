@@ -8,7 +8,6 @@ const PostSchema = new Schema({
     content: { type: String, default: '' },
     youtube_link: { type: String, default: '' },
     image: { type: Array, default: [] },
-    post_id: { type: String, require: true },
     vote_rate: { type: Number, default: 0 },
     is_actived: { type: Boolean, default: true },
     is_blocked: { type: Boolean, default: false },

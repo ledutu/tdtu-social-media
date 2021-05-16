@@ -5,11 +5,11 @@ const Response = require('../utils/response');
 
 async function index(request, response) {
     response.cookie('lang', 'vi', { maxAge: 900000 });
-    const posts = await Post.find({}).populate('user').populate('comments');
-    
-    console.log(posts);
-    
-    response.render('home', { posts });
+    const posts = await Post.find({}, {}, { sort: { 'createdAt': -1 } }).populate('user').populate('comments');
+
+    request.toastr.success('Successfully logged in.', "You're in!");
+
+    response.render('home', { posts, request });
 }
 
 async function postArticle(request, response) {
@@ -24,9 +24,9 @@ async function postArticle(request, response) {
 
     await post.save();
 
-    const data = await Post.find({});
+    post = await Post.findById(post._id).populate('user');
 
-    const newResponse = Response.response(200, data);
+    const newResponse = Response.response(200, post);
 
     return response.json(newResponse)
 }

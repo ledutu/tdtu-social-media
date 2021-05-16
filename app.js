@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 const session = require('express-session');
 var bodyParser = require('body-parser');
+var toastr = require('express-toastr');
+var flash = require('connect-flash')
 
 //Middleware
 const authMiddleware = require('./src/middlewares/auth');
@@ -25,6 +27,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, '/src/views'));
 app.set('view engine', 'ejs');
+
+app.use(flash());
+app.use(toastr());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
