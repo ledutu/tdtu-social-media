@@ -8,8 +8,8 @@
                     <div class="header-top-navigation">
                         <nav>
                             <ul>
-                                <li class="active"><a href="http://localhost:3000/"><%= __('home') %> </a></li>
-                                <li class="notification-trigger"><a class="msg-trigger-btn" href="#b"><%= __('notification') %></a></li>
+                                <li><a href="/"><%= __('home') %> </a></li>
+                                <li class="notification-trigger"><a href="/notification"><%= __('notification') %></a></li>
                             </ul>
                         </nav>
                     </div>
@@ -19,7 +19,7 @@
                 <div class="col-md-2">
                     <!-- brand logo start -->
                     <div class="brand-logo text-center">
-                        <a href="http://localhost:3000/">
+                        <a href="/">
                             <img src="/assets/images/logo/tdt.png" class="tdt-logo-image" alt="brand logo">
                         </a>
                     </div>
@@ -81,9 +81,9 @@
             <div class="mobile-menu w-100">
                 <ul>
                     <li>
-                        <button class="notification"><i class="flaticon-notification"></i>
+                        <a href="/notification" class="notification"><i class="flaticon-notification"></i>
                             <span>03</span>
-                        </button>
+                        </a>
                     </li>
                     <li>
                         <button class="search-trigger">

@@ -31,7 +31,12 @@ async function postArticle(request, response) {
     return response.json(newResponse)
 }
 
+function postComment(request, response) {
+    
+}
+
 module.exports = {
     index,
-    postArticle
+    postArticle,
+    postComment
 }
