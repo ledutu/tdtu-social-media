@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const notificationCategorySchema = new Schema({
+const facultySchema = new Schema({
     id: { type: String, required: true, unique: true, index: true },
     name: { type: String, require: true },
-    is_actived: { type: Boolean, default: true }
+    key_name: { type: String },
 }, { timestamps: true });
 
-const NotificationCategory = mongoose.model('notification_category', notificationCategorySchema);
+const Faculty = mongoose.model('faculty', facultySchema);
 
 module.exports = {
-    NotificationCategory,
+    Faculty,
 }

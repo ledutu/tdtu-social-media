@@ -9,7 +9,7 @@ const notificationSchema = new Schema({
     user_id: { type: String, required: true },
     is_actived: { type: Boolean, default: true },
     is_blocked: { type: Boolean, default: false },
-});
+}, { timestamps: true });
 
 const Notification = mongoose.model('notification', notificationSchema);
 

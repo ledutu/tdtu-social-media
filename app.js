@@ -5,12 +5,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var i18n = require("i18n");
 var mongoose = require('mongoose');
+var passport = require('passport');
+const session = require('express-session');
+var bodyParser = require('body-parser');
+
+//Middleware
+const authMiddleware = require('./src/middlewares/auth');
 
 var homeRouter = require('./src/routes/home');
 var authRouter = require('./src/routes/auth');
 var userRouter = require('./src/routes/users');
-
-
 //admin
 var adminRouter = require('./src/routes/admin');
 
@@ -20,6 +24,17 @@ var app = express();
 app.set('views', path.join(__dirname, '/src/views'));
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'TONDUCTHANG'
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,7 +45,7 @@ i18n.configure({
   locales: ['en', 'vi'],
   directory: __dirname + '/src/locales',
   cookie: 'lang',
-  objectNotation: true 
+  objectNotation: true
 });
 
 //Connect to mongoDB
@@ -44,19 +59,18 @@ mongoose.connect("mongodb://localhost:27017/tdt_social_media", {
   console.log(error);
   console.log('Error connecting to database');
 });
-
-
-//Home
-app.use('/', homeRouter);
+app.use('/admin', adminRouter);
 
 //Auth
 app.use('/auth', authRouter);
 
+//Home
+app.use('/', authMiddleware.isLogin, homeRouter);
+
 //Profile
-app.use('/user', userRouter);
+app.use('/user', authMiddleware.isLogin, userRouter);
 
 //Admin home
-app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
