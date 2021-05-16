@@ -15,6 +15,8 @@ const authMiddleware = require('./src/middlewares/auth');
 var homeRouter = require('./src/routes/home');
 var authRouter = require('./src/routes/auth');
 var userRouter = require('./src/routes/users');
+var notificationRouter = require('./src/routes/notification');
+
 //admin
 var adminRouter = require('./src/routes/admin');
 
@@ -71,6 +73,7 @@ app.use('/', authMiddleware.isLogin, homeRouter);
 app.use('/user', authMiddleware.isLogin, userRouter);
 
 //Admin home
+app.use('/notification', notificationRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
