@@ -151,15 +151,15 @@
                                     <div class="profile-thumb">
                                         <a href="#">
                                             <figure class="profile-thumb-middle">
-                                                <img src="/assets/images/profile/profile-small-1.jpg" alt="profile picture">
+                                                <img src="<%- post.user.image %>" alt="profile picture">
                                             </figure>
                                         </a>
                                     </div>
                                     <!-- profile picture end -->
     
                                     <div class="posted-author">
-                                        <h6 class="author"><a href="/user/profile">merry watson</a></h6>
-                                        <span class="post-time">20 min ago</span>
+                                        <h6 class="author"><a href="/user/profile"><%- post.user.full_name %></a></h6>
+                                        <span class="post-time"><%- Date('m/d/y', post.createdAt) %> </span>
                                     </div>
     
                                 </div>
@@ -188,7 +188,7 @@
                                                 <div class="col-4">
                                                     <div class="row">
                                                         <% for( let i = 1; i < 10; i++ ) { %>
-                                                        <div class="col-12" style="display:<%- i >= 4? 'none': '' %>">
+                                                        <div class="col-12" style="display:<%= i >= 4? 'none': '' %>">
                                                             <figure class="post-thumb">
                                                                 <a class="gallery-selector" href="<%- post.image[1] %>">
                                                                     <img src="<%- post.image[1] %>" alt="post image">
@@ -210,20 +210,14 @@
                                     <div class="post-meta">
                                         <button class="post-meta-like">
                                             <i class="bi bi-heart-beat"></i>
-                                            <span>You and 201 people like this</span>
+                                            <span><%- post.vote_rate || '0' %> </span>
                                             <strong>201</strong>
                                         </button>
                                         <ul class="comment-share-meta">
                                             <li>
                                                 <button class="post-comment">
                                                     <i class="bi bi-chat-bubble"></i>
-                                                    <span>41</span>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button class="post-share">
-                                                    <i class="bi bi-share"></i>
-                                                    <span>07</span>
+                                                    <span><%- post.comments.length %> </span>
                                                 </button>
                                             </li>
                                         </ul>

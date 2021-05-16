@@ -5,8 +5,10 @@ const Response = require('../utils/response');
 
 async function index(request, response) {
     response.cookie('lang', 'vi', { maxAge: 900000 });
-    const posts = await Post.find({}).populate('user');
-    console.log(posts)
+    const posts = await Post.find({}).populate('user').populate('comments');
+    
+    console.log(posts);
+    
     response.render('home', { posts });
 }
 
