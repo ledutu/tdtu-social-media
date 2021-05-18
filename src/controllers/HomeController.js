@@ -30,7 +30,19 @@ async function postArticle(request, response) {
 
     return response.json(newResponse)
 }
-
+async function deletePost(req, res) {
+    const { post_id } = req.body;
+    await Post.findByIdAndDelete(post_id,(err) => {
+        if (!err) {
+            return res.json({
+                success: true,
+            })
+        }
+        return res.json({
+            success: false,
+        })
+    })
+}
 function postComment(request, response) {
     
 }
@@ -38,5 +50,6 @@ function postComment(request, response) {
 module.exports = {
     index,
     postArticle,
-    postComment
+    postComment,
+    deletePost
 }

@@ -52,7 +52,7 @@ img {
 .button {
   background-color: #ffffff;
   width: 100%;
-  padding: 15px;
+  padding-left: 125px;
   border: 0;
   box-sizing: border-box;
   cursor: pointer;

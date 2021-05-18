@@ -76,7 +76,7 @@
 
                         <div class="timeline-content">
                         <% posts.forEach(post => { %>
-                            <div class="card">
+                            <div class="card card-content">
                                 <!-- post title start -->
                                 <div class="post-title d-flex align-items-center">
                                     <!-- profile picture end -->
@@ -94,7 +94,17 @@
                                         <span class="post-time"><%- new Date(post.user.createdAt).getHours() + ":" + new Date(post.user.createdAt).getMinutes() +
                                             " " + new Date(post.user.createdAt).getDate() + "/" + new Date(post.user.createdAt).getMonth() + "/" + new Date(post.user.createdAt).getFullYear()%> </span>
                                     </div>
-    
+                                    <div class="post-settings-bar">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <div class="post-settings arrow-shape">
+                                            <ul>
+                                                <li><button onclick='deletePost("<%= post._id %>")'>delete post</button></li>
+                                                <li><button>edit post</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- post title start -->
                                 <div class="post-content">
@@ -163,29 +173,37 @@
         <!-- Comment Modal -->
         <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="commentLabel">Comment</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="commentLabel">Comment</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 <div class="modal-body">
                     <% for( let i = 0; i < 10; i++ ) { %>
                         <div class="data-info">
+                            <img src="/assets/images/profile/profile-small-5.jpg" alt="" class="rounded-circle" width="40" height="40"> 
+                               <div > 
+                                    <h6> Username <%- i %></h6>
+                                    <div>Content</div>
+                                </div>
+                                
+                        </div>
+                        <!-- <div class="data-info" id="<%- i %>">
                             <h6>Username<%- i %></h6>
                             <p>Content</p>  
-                            </div>
+                        </div> -->
                         <hr>
                     <% } %>
                 </div>
                 <div class="modal-footer">
                     <form action="" method="post">
-                        <input type="text" id="comment" placeholder="Comment">
-                        <input type="button" value="Save">
+                        <img src="/assets/images/profile/profile-small-5.jpg" alt="" class="rounded-circle" width="40" height="40">
+                        <input type="text" id="comment" placeholder="Write Something">
+                        <button type="button"  id="postComment" class="btn">Submit</button>
                     </form>
                 </div>
-            </div>
             </div>
         </div>
         

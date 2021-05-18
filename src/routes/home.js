@@ -7,5 +7,5 @@ const HomeController = require('../controllers/HomeController');
 router.get('/', HomeController.index);
 router.post('/postArticle', HomeController.postArticle);
 router.post('/comment', HomeController.postComment);
-
+router.post('/del',HomeController.deletePost);
 module.exports = router;
