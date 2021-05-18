@@ -188,14 +188,8 @@
                                     <h6> Username <%- i %></h6>
                                     <div>Content</div>
                                 </div>
-                                
                         </div>
-                        <!-- <div class="data-info" id="<%- i %>">
-                            <h6>Username<%- i %></h6>
-                            <p>Content</p>  
-                        </div> -->
-                        <hr>
-                    </div>
+                    <% } %>
                 </div>
                 <div class="modal-footer">
                     <form action="" method="post">
@@ -227,7 +221,7 @@
         $('#articleForm').submit(function(e) {
             e.preventDefault();
             var article = $('#article').val();
-            axios.post('http://localhost:3000/postArticle', {
+            axios.post('/postArticle', {
                 article
             }).then(response => {
                 const post = response.data.data;
@@ -282,15 +276,15 @@
             // });
         })
     
-        $(document).on("click", ".post-comment", function(){
-            var postId = $(this).data('id');
+        // $(document).on("click", ".post-comment", function(){
+        //     var postId = $(this).data('id');
             
-            // posts.find(index => index._id == ).forEach
+        //     // posts.find(index => index._id == ).forEach
                         
-            $(".modal-footer #postId").val(postId);
+        //     $(".modal-footer #postId").val(postId);
             
-            console.log(postId);
-        })
+        //     console.log(postId);
+        // })
     </script>
 
 </body>
