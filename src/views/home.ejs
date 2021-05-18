@@ -153,7 +153,7 @@
                                     <div class="post-meta">
                                         <ul class="comment-share-meta">
                                             <li>
-                                                <button class="post-comment" data-toggle="modal" data-target="#commentModal">
+                                                <button class="post-comment" data-toggle="modal" data-id="<%- post._id %> " data-target="#commentModal">
                                                     <i class="bi bi-chat-bubble"></i>
                                                     <span><%- post.comments.length %> </span>
                                                 </button>
@@ -188,20 +188,15 @@
                                     <h6> Username <%- i %></h6>
                                     <div>Content</div>
                                 </div>
-                                
                         </div>
-                        <!-- <div class="data-info" id="<%- i %>">
-                            <h6>Username<%- i %></h6>
-                            <p>Content</p>  
-                        </div> -->
-                        <hr>
                     <% } %>
                 </div>
                 <div class="modal-footer">
                     <form action="" method="post">
                         <img src="/assets/images/profile/profile-small-5.jpg" alt="" class="rounded-circle" width="40" height="40">
                         <input type="text" id="comment" placeholder="Write Something">
-                        <button type="button"  id="postComment" class="btn">Submit</button>
+                        <input type="hidden" name="postId" id="postId">
+                        <input type="button" id="postComment" class="btn" value="Save">
                     </form>
                 </div>
             </div>
@@ -226,7 +221,7 @@
         $('#articleForm').submit(function(e) {
             e.preventDefault();
             var article = $('#article').val();
-            axios.post('http://localhost:3000/postArticle', {
+            axios.post('/postArticle', {
                 article
             }).then(response => {
                 const post = response.data.data;
@@ -251,11 +246,6 @@
                                     <div class="post-content">\
                                         <p class="post-desc">`+post.content+`</p>\
                                         <div class="post-meta">\
-                                            <button class="post-meta-like">\
-                                                <i class="bi bi-heart-beat"></i>\
-                                                <span>`+post.vote_rate || '0'+`</span>\
-                                                <strong>`+post.vote_rate || '0'`+</strong>\
-                                            </button>\
                                             <ul class="comment-share-meta">\
                                                 <li>\
                                                     <button class="post-comment">\
@@ -285,6 +275,16 @@
                 
             // });
         })
+    
+        // $(document).on("click", ".post-comment", function(){
+        //     var postId = $(this).data('id');
+            
+        //     // posts.find(index => index._id == ).forEach
+                        
+        //     $(".modal-footer #postId").val(postId);
+            
+        //     console.log(postId);
+        // })
     </script>
 
 </body>
