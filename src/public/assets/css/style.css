@@ -89,6 +89,15 @@ img {
   transition: 0.4s;
 }
 
+#comment{
+  box-sizing: border-box;
+  font-size: inherit;
+  width: 500px;
+  padding: 0.25em 0.5em;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+}
+
 .bg-img {
   background-size: cover;
   background-position: center;
