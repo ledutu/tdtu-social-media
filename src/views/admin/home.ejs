@@ -29,24 +29,24 @@
         <div class="content">
 
             <!-- Start Page Header -->
-            <div class="page-header">
+            <!-- <div class="page-header">
                 <h1 class="title">Dashboard</h1>
                 <ol class="breadcrumb">
                     <li class="active">This is a quick overview of some features</li>
-                </ol>
+                </ol> -->
 
                 <!-- Start Page Header Right Div -->
-                <div class="right">
+                <!-- <div class="right">
                 <div class="btn-group" role="group" aria-label="...">
                     <a href="index.html" class="btn btn-light">Dashboard</a>
                     <a href="#" class="btn btn-light"><i class="fa fa-refresh"></i></a>
                     <a href="#" class="btn btn-light"><i class="fa fa-search"></i></a>
                     <a href="#" class="btn btn-light" id="topstats"><i class="fa fa-line-chart"></i></a>
                 </div>
-                </div>
+                </div> -->
                 <!-- End Page Header Right Div -->
 
-            </div>
+            <!-- </div> -->
             <!-- End Page Header -->
 
 
@@ -57,8 +57,15 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                 
-                        <div class="panel-title">
-                            Striped rows
+                        <div class="panel-title admin-panel__title">
+                            Account List
+                            <div class="admin-panel__filter"> 
+                                Filter by : 
+                                <select class="form-select form-select-lg admin-panel__select" aria-label="Default select example">
+                                    <option selected="selected" value="all">Tất cả</option>
+                                    <option value="">qweqwe qweqweqwe qweqweqe qweqweqe qweqw</option>
+                                </select>
+                            </div>
                         </div>
                 
                         <div class="panel-body table-responsive">
@@ -66,24 +73,18 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <td>Order ID</td>
-                                        <td>Product</td>
-                                        <td>Buyer</td>
-                                        <td>Date</td>
-                                        <td>Order Note</td>
-                                        <td>Payment</td>
+                                        <td>Username</td>
+                                        <td>Full name</td>
+                                        <td>Categoris</td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% for( let index = 0; index < 10; index++ ) { %>
                                     
                                         <tr>
-                                            <td># <b>9652</b></td>
                                             <td>Kode Gaming Laptop</td>
                                             <td>John Doe</td>
-                                            <td>12/10/2015</td>
                                             <td>As we got further and further away, it [the Earth] diminished in size.</td>
-                                            <td>Credit Card</td>
                                         </tr>
                                     <% } %>
                                         
