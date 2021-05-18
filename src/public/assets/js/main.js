@@ -205,3 +205,21 @@
     
 })(jQuery);
 
+function deletePost(id){
+	if (confirm("Ban muon xoa post nay ?")) {
+		
+		$.ajax({
+			type: "POST",
+			url: "/del",
+			data: { post_id: id },
+			dataType: "json",
+			success: function (response) {
+				if (response.success == true) {
+					alert("Xoa thanh cong!")
+					$(".timeline-content").load("/ .card-content");
+				}
+
+			}
+		})
+	}
+}

@@ -76,7 +76,7 @@
 
                         <div class="timeline-content">
                         <% posts.forEach(post => { %>
-                            <div class="card">
+                            <div class="card card-content">
                                 <!-- post title start -->
                                 <div class="post-title d-flex align-items-center">
                                     <!-- profile picture end -->
@@ -94,7 +94,17 @@
                                         <span class="post-time"><%- new Date(post.user.createdAt).getHours() + ":" + new Date(post.user.createdAt).getMinutes() +
                                             " " + new Date(post.user.createdAt).getDate() + "/" + new Date(post.user.createdAt).getMonth() + "/" + new Date(post.user.createdAt).getFullYear()%> </span>
                                     </div>
-    
+                                    <div class="post-settings-bar">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <div class="post-settings arrow-shape">
+                                            <ul>
+                                                <li><button onclick='deletePost("<%= post._id %>")'>delete post</button></li>
+                                                <li><button>edit post</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- post title start -->
                                 <div class="post-content">

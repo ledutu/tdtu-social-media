@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 const { Post } = require('../models/post');
+const { post } = require('../routes/auth');
 const Response = require('../utils/response');
 
 async function index(request, response) {
@@ -30,7 +31,19 @@ async function postArticle(request, response) {
 
     return response.json(newResponse)
 }
-
+async function deletePost(req, res) {
+    const { post_id } = req.body;
+    await Post.findByIdAndDelete(post_id,(err) => {
+        if (!err) {
+            return res.json({
+                success: true,
+            })
+        }
+        return res.json({
+            success: false,
+        })
+    })
+}
 function postComment(request, response) {
     
 }
@@ -38,5 +51,6 @@ function postComment(request, response) {
 module.exports = {
     index,
     postArticle,
-    postComment
+    postComment,
+    deletePost
 }
