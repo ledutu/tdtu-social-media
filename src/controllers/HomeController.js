@@ -1,7 +1,6 @@
 var express = require('express');
 var passport = require('passport');
 const { Post } = require('../models/post');
-const { post } = require('../routes/auth');
 const Response = require('../utils/response');
 
 async function index(request, response) {
