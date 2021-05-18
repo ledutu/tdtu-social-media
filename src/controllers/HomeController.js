@@ -1,12 +1,12 @@
 var express = require('express');
 var passport = require('passport');
 const { Post } = require('../models/post');
+const { Comment } = require('../models/comment');
 const Response = require('../utils/response');
 
 async function index(request, response) {
     response.cookie('lang', 'vi', { maxAge: 900000 });
     const posts = await Post.find({}, {}, { sort: { 'createdAt': -1 } }).populate('user').populate('comments');
-
     request.toastr.success('Successfully logged in.', "You're in!");
 
     response.render('home', { posts, request });
@@ -43,8 +43,25 @@ async function deletePost(req, res) {
         })
     })
 }
-function postComment(request, response) {
+
+async function postComment(request, response) {
+
+    const { comment, postId } = request.body;
+
+    let commentModel = new Comment({
+        post: postId,
+        user: request.user._id,
+        comment,
+    });
     
+    await commentModel.save();
+    
+    commentModel = await Comment.findById(commentModel._id).populate('user');
+    
+    const newResponse = Response.response(200, commentModel);
+    
+    return response.json(newResponse);
+
 }
 
 module.exports = {
