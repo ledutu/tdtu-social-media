@@ -223,3 +223,14 @@ function deletePost(id){
 		})
 	}
 }
+var page=1;
+window.onscroll = function () { 
+	if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight-300)) {
+        page = page + 1
+        
+            $.get('/'+page, function(data){ 
+                $(data).find(".card-content").appendTo(".timeline-content");
+            });
+		
+    }
+ };

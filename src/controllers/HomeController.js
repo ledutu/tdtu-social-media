@@ -5,7 +5,14 @@ const Response = require('../utils/response');
 
 async function index(request, response) {
     response.cookie('lang', 'vi', { maxAge: 900000 });
-    const posts = await Post.find({}, {}, { sort: { 'createdAt': -1 } }).populate('user').populate('comments');
+
+    var page = 1;
+
+    if(request.params.page){
+        page=parseInt(request.params.page)
+    }
+
+    const posts = await Post.find({}, {}, { sort: { 'createdAt': -1 } }).populate('user').populate('comments').limit(10 * page).skip(10 * (page - 1));
 
     request.toastr.success('Successfully logged in.', "You're in!");
 
@@ -32,7 +39,7 @@ async function postArticle(request, response) {
 }
 async function deletePost(req, res) {
     const { post_id } = req.body;
-    await Post.findByIdAndDelete(post_id,(err) => {
+    await Post.findByIdAndDelete(post_id, (err) => {
         if (!err) {
             return res.json({
                 success: true,
@@ -44,7 +51,7 @@ async function deletePost(req, res) {
     })
 }
 function postComment(request, response) {
-    
+
 }
 
 module.exports = {
