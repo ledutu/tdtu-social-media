@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 const { Post } = require('../models/post');
+const { User } = require('../models/user');
 const { Comment } = require('../models/comment');
 const Response = require('../utils/response');
 
@@ -9,8 +10,8 @@ async function index(request, response) {
 
     var page = 1;
 
-    if(request.params.page){
-        page=parseInt(request.params.page)
+    if (request.params.page) {
+        page = parseInt(request.params.page)
     }
 
     const posts = await Post.find({}, {}, { sort: { 'createdAt': -1 } }).populate('user').populate('comments').limit(10 * page).skip(10 * (page - 1));
@@ -59,13 +60,34 @@ async function postComment(request, response) {
         user: request.user._id,
         comment,
     });
-    
+
     await commentModel.save();
-    
+
+    let postModel = await Post.findById(postId);
+
+    postModel.comments = [commentModel._id, ...postModel.comments];
+
+    await postModel.save();
+
     commentModel = await Comment.findById(commentModel._id).populate('user');
-    
+
     const newResponse = Response.response(200, commentModel);
-    
+
+    return response.json(newResponse);
+}
+
+async function getPostDetail(request, response) {
+    const { id } = request.params;
+
+    let postModel = await Post.findById(id).populate('user').populate('comments');
+
+    let commentModel = await Comment.find({ post: id }).populate('user');
+
+    const newResponse = Response.response(200, {
+        post: postModel,
+        comments: commentModel
+    });
+
     return response.json(newResponse);
 }
 
@@ -73,5 +95,6 @@ module.exports = {
     index,
     postArticle,
     postComment,
-    deletePost
+    deletePost,
+    getPostDetail,
 }

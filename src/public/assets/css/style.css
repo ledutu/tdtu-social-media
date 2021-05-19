@@ -3513,6 +3513,10 @@ textarea:focus {
   width: 100%;
 }
 
+.data-info-detail {
+  margin-bottom: 25px;
+}
+
 .mob-frnd-search-inner {
   left: 75px;
   top: 0;
