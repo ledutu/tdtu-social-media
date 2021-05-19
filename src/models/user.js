@@ -20,6 +20,22 @@ const userSchema = new mongoose.Schema({
     is_block: { type: Boolean, default: '' }
 }, { timestamps: true });
 
+userSchema.statics.authenticate = function (username, password, callback) {
+    User.findOne({ username }).select('password_hash').exec(function (err, user) {
+        if (err) return callback(err);
+        else if (!user) {
+            var err = new Error('User not found.');
+            err.status = 401;
+            return callback(err);
+        }
+
+        bcrypt.compare(password, user.password_hash, function (err, result) {
+            if (result) return callback(null, user);
+            else return callback();
+        })
+    })
+}
+
 const User = mongoose.model('users', userSchema);
 
 module.exports = {

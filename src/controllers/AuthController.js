@@ -5,7 +5,7 @@ const Helpers = require('../utils/helpers');
 async function index(request, response) {
     response.cookie('lang', 'vi', { maxAge: 900000 });
     request.toastr.success('Successfully logged in.', "You're in!");
-    response.render('auth', { request });
+    response.render('auth', { messages: request.flash('login-fail') });
 }
 
 function loginWithGoogle(request, response) {
@@ -46,9 +46,15 @@ function logout(request, response) {
     response.redirect('/');
 }
 
+//Admin login
+function postLogin(request, response) {
+    const { username, password } = request.body;
+}
+
 module.exports = {
     index,
     loginWithGoogle,
     checkLoginWithGoogle,
     logout,
+    postLogin,
 }

@@ -32,7 +32,7 @@ app.use(flash());
 app.use(toastr());
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(session({
   resave: true,
@@ -66,10 +66,19 @@ mongoose.connect("mongodb://localhost:27017/tdt_social_media", {
   console.log(error);
   console.log('Error connecting to database');
 });
-app.use('/admin', adminRouter);
 
 //Auth
 app.use('/auth', authRouter);
+
+app.get('/flash', function(req, res){
+  // Set a flash message by passing the key, followed by the value, to req.flash().
+  req.flash('login-fail', 'Thông tin tài khoản không đúng')
+  res.redirect('/auth');
+});
+
+app.use('/admin', [authMiddleware.isLogin, authMiddleware.isAdmin], adminRouter);
+
+app.use('/notification', authMiddleware.isLogin, notificationRouter)
 
 //Home
 app.use('/', authMiddleware.isLogin, homeRouter);
@@ -78,7 +87,6 @@ app.use('/', authMiddleware.isLogin, homeRouter);
 app.use('/user', authMiddleware.isLogin, userRouter);
 
 //Admin home
-app.use('/notification', notificationRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

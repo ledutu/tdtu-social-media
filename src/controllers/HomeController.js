@@ -7,16 +7,18 @@ const Response = require('../utils/response');
 
 async function index(request, response) {
     response.cookie('lang', 'vi', { maxAge: 900000 });
-
     var page = 1;
-
+    
+    //set global variables
+    request.app.locals.user = request.user;
+    
     if (request.params.page) {
         page = parseInt(request.params.page)
     }
 
     const posts = await Post.find({}, {}, { sort: { 'createdAt': -1 } }).populate('user').populate('comments').limit(10 * page).skip(10 * (page - 1));
 
-    response.render('home', { posts, request });
+    response.render('home', { posts });
 }
 
 async function postArticle(request, response) {
