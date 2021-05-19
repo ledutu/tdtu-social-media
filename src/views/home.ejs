@@ -90,7 +90,7 @@
                                     <!-- profile picture end -->
     
                                     <div class="posted-author">
-                                        <h6 class="author"><a href="/user/profile"><%- post.user.full_name %></a></h6>
+                                        <h6 class="author"><a href="/user/profile/<%= post.user._id%>" ><%- post.user.full_name %></a></h6>
                                         <span class="post-time"><%- new Date(post.user.createdAt).getHours() + ":" + new Date(post.user.createdAt).getMinutes() +
                                             " " + new Date(post.user.createdAt).getDate() + "/" + new Date(post.user.createdAt).getMonth() + "/" + new Date(post.user.createdAt).getFullYear()%> </span>
                                     </div>
