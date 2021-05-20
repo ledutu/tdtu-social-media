@@ -9,4 +9,5 @@ router.post('/postArticle', HomeController.postArticle);
 router.post('/comment', HomeController.postComment);
 router.get('/post/:id', HomeController.getPostDetail);
 router.post('/del',HomeController.deletePost);
+router.post('/deleteComment',HomeController.deleteComment);
 module.exports = router;

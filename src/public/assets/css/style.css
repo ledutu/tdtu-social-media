@@ -102,6 +102,10 @@ img {
 
 }
 
+/* #commentOption{
+  float: right;
+} */
+
 #postComment{
   background-color:#e47263;
   color: #ffffff;
@@ -3510,6 +3514,13 @@ textarea:focus {
 
 .search-toggle-btn {
   font-size: 20px;
+  width: 100%;
+}
+
+.data-info-with-button {
+  display: flex;
+  justify-content: between;
+  align-items: center;
   width: 100%;
 }
 

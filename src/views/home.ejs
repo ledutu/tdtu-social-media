@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    
+
     <%- include('layouts/head') %>
 
 </head>
@@ -17,306 +17,363 @@
 <body>
 
     <!-- header -->
-    <%- include('layouts/header.ejs') %> 
+    <%- include('layouts/header.ejs') %>
 
-    <main>
-        <div class="main-wrapper pt-80">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 order-2 order-lg-1">
-                        <aside class="widget-area">
-                            <!-- widget single item start -->
-                            <div class="card widget-item">
-                                <h4 class="widget-title">latest top news</h4>
-                                <div class="widget-body">
-                                    <ul class="like-page-list-wrapper">
-                                    <% for( let i = 0; i < 5; i++ ) { %>
-                                    
-                                    <li class="unorder-list">
-                                        <!-- profile picture end -->
+        <main>
+            <div class="main-wrapper pt-80">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 order-2 order-lg-1">
+                            <aside class="widget-area">
+                                <!-- widget single item start -->
+                                <div class="card widget-item">
+                                    <h4 class="widget-title">latest top news</h4>
+                                    <div class="widget-body">
+                                        <ul class="like-page-list-wrapper">
+                                            <% for( let i=0; i < 5; i++ ) { %>
 
-                                        <div class="unorder-list-info">
-                                            <h3 class="list-title" width="50px"><a href="#">CNTT</a></h3>
-                                            <p class="sub-list">Notification Content</p>
-                                            <p class="list-subtitle">2 min ago</p>
-                                        </div>
-                                    </li>
-                                    <% } %>
+                                                <li class="unorder-list">
+                                                    <!-- profile picture end -->
+
+                                                    <div class="unorder-list-info">
+                                                        <h3 class="list-title" width="50px"><a href="#">CNTT</a></h3>
+                                                        <p class="sub-list">Notification Content</p>
+                                                        <p class="list-subtitle">2 min ago</p>
+                                                    </div>
+                                                </li>
+                                                <% } %>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- widget single item end -->
-                        </aside>
-                    </div>
-
-                    <div class="col-lg-9 order-1 order-lg-2">
-                        <!-- share box start -->                        
-                        <div class="card card-small">
-                            <div class="share-box-inner">
-                                <!-- profile picture end -->
-                                <div class="profile-thumb">
-                                    <a href="#">
-                                        <figure class="profile-thumb-middle">
-                                            <img src="<%- user.image %> " alt="profile picture">
-                                        </figure>
-                                    </a>
-                                </div>
-                                <!-- profile picture end -->
-
-                                <!-- share content box start -->
-                                <div class="share-content-box w-100">
-                                    <form class="share-text-box" action="" id="articleForm">
-                                        <textarea name="article" id="article" class="share-text-field" aria-disabled="true" placeholder="Say Something" data-toggle="modal" data-target="#textbox"></textarea>
-                                        <button class="btn-share" type="submit">share</button>
-                                    </form>
-                                </div>
-                                <!-- share content box end -->
-                            </div>
+                                <!-- widget single item end -->
+                            </aside>
                         </div>
-                        <!-- share box end -->
 
-                        <div class="timeline-content">
-                        <% posts.forEach(post => { %>
-                            <div class="card card-content">
-                                <!-- post title start -->
-                                <div class="post-title d-flex align-items-center">
+                        <div class="col-lg-9 order-1 order-lg-2">
+                            <!-- share box start -->
+                            <div class="card card-small">
+                                <div class="share-box-inner">
                                     <!-- profile picture end -->
                                     <div class="profile-thumb">
                                         <a href="#">
                                             <figure class="profile-thumb-middle">
-                                                <img src="<%- post.user.image %>" alt="profile picture">
+                                                <img src="<%- user.image %> " alt="profile picture">
                                             </figure>
                                         </a>
                                     </div>
                                     <!-- profile picture end -->
-    
-                                    <div class="posted-author">
-                                        <h6 class="author"><a href="/user/profile/<%= post.user._id%>" ><%- post.user.full_name %></a></h6>
-                                        <span class="post-time"><%- new Date(post.user.createdAt).getHours() + ":" + new Date(post.user.createdAt).getMinutes() +
-                                            " " + new Date(post.user.createdAt).getDate() + "/" + new Date(post.user.createdAt).getMonth() + "/" + new Date(post.user.createdAt).getFullYear()%> </span>
+
+                                    <!-- share content box start -->
+                                    <div class="share-content-box w-100">
+                                        <form class="share-text-box" action="" id="articleForm">
+                                            <textarea name="article" id="article" class="share-text-field"
+                                                aria-disabled="true" placeholder="Say Something" data-toggle="modal"
+                                                data-target="#textbox"></textarea>
+                                            <button class="btn-share" type="submit">share</button>
+                                        </form>
                                     </div>
-                                    <div class="post-settings-bar">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <div class="post-settings arrow-shape">
-                                            <ul>
-                                                <li><button onclick='deletePost("<%= post._id %>")'>delete post</button></li>
-                                                <li><button>edit post</button></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    <!-- share content box end -->
                                 </div>
-                                <!-- post title start -->
-                                <div class="post-content">
-                                    <p class="post-desc"><%- post.content %></p>
-                                    <% if (post.image.length === 1) { %>
-                                        <div class="post-thumb-gallery">
-                                            <figure class="post-thumb img-popup">
-                                                <a href="<%- post.image[0] %>">
-                                                    <img src="<%- post.image[0] %>" alt="post image">
+                            </div>
+                            <!-- share box end -->
+
+                            <div class="timeline-content">
+                                <% posts.forEach(post=> { %>
+                                    <div class="card card-content">
+                                        <!-- post title start -->
+                                        <div class="post-title d-flex align-items-center">
+                                            <!-- profile picture end -->
+                                            <div class="profile-thumb">
+                                                <a href="#">
+                                                    <figure class="profile-thumb-middle">
+                                                        <img src="<%- post.user.image %>" alt="profile picture">
+                                                    </figure>
                                                 </a>
-                                            </figure>
-                                        </div> 
-                                        
-                                    <% } else if (post.image.length > 1) { %>
-                                        <div class="post-thumb-gallery img-gallery">
-                                            <div class="row no-gutters">
-                                                <div class="col-8">
-                                                    <figure class="post-thumb">
-                                                        <a class="gallery-selector" href="<%- post.image[0] %>">
+                                            </div>
+                                            <!-- profile picture end -->
+
+                                            <div class="posted-author">
+                                                <h6 class="author"><a href="/user/profile/<%= post.user._id%>">
+                                                        <%- post.user.full_name %>
+                                                    </a></h6>
+                                                <span class="post-time">
+                                                    <%- new Date(post.user.createdAt).getHours() + ":" + new
+                                                        Date(post.user.createdAt).getMinutes() + " " + new
+                                                        Date(post.user.createdAt).getDate() + "/" + new
+                                                        Date(post.user.createdAt).getMonth() + "/" + new
+                                                        Date(post.user.createdAt).getFullYear()%>
+                                                </span>
+                                            </div>
+                                            <div class="post-settings-bar">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                                <div class="post-settings arrow-shape">
+                                                    <ul>
+                                                        <li><button onclick='deletePost("<%= post._id %>")'>delete post</button></li>
+                                                        <li><button>edit post</button></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- post title start -->
+                                        <div class="post-content">
+                                            <p class="post-desc">
+                                                <%- post.content %>
+                                            </p>
+                                            <% if (post.image.length===1) { %>
+                                                <div class="post-thumb-gallery">
+                                                    <figure class="post-thumb img-popup">
+                                                        <a href="<%- post.image[0] %>">
                                                             <img src="<%- post.image[0] %>" alt="post image">
                                                         </a>
                                                     </figure>
                                                 </div>
-                                                <div class="col-4">
-                                                    <div class="row">
-                                                        <% for( let i = 1; i < 10; i++ ) { %>
-                                                        <div class="col-12" style="display:<%= i >= 4? 'none': '' %>">
-                                                            <figure class="post-thumb">
-                                                                <a class="gallery-selector" href="<%- post.image[1] %>">
-                                                                    <img src="<%- post.image[1] %>" alt="post image">
-                                                                </a>
-                                                            </figure>
+
+                                                <% } else if (post.image.length> 1) { %>
+                                                    <div class="post-thumb-gallery img-gallery">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-8">
+                                                                <figure class="post-thumb">
+                                                                    <a class="gallery-selector"
+                                                                        href="<%- post.image[0] %>">
+                                                                        <img src="<%- post.image[0] %>"
+                                                                            alt="post image">
+                                                                    </a>
+                                                                </figure>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="row">
+                                                                    <% for( let i=1; i < 10; i++ ) { %>
+                                                                        <div class="col-12"
+                                                                            style="display:<%= i >= 4? 'none': '' %>">
+                                                                            <figure class="post-thumb">
+                                                                                <a class="gallery-selector"
+                                                                                    href="<%- post.image[1] %>">
+                                                                                    <img src="<%- post.image[1] %>"
+                                                                                        alt="post image">
+                                                                                </a>
+                                                                            </figure>
+                                                                        </div>
+                                                                        <% } %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <% } else if (post.youtube_link) { %>
+                                                        <div class="plyr__video-embed plyr-youtube">
+                                                            <iframe src="<%- post.youtube_link %>"
+                                                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                                allowfullscreen></iframe>
                                                         </div>
                                                         <% } %>
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                                            <div class="post-meta">
+                                                                <ul class="comment-share-meta">
+                                                                    <li>
+                                                                        <button class="post-comment" data-toggle="modal"
+                                                                            data-id="<%- post._id %>"
+                                                                            data-target="#commentModal">
+                                                                            <i class="bi bi-chat-bubble"></i>
+                                                                            <span>
+                                                                                <%- post.comments.length %>
+                                                                            </span>
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
                                         </div>
-                                    
-                                    <% } else if (post.youtube_link) { %>
-                                        <div class="plyr__video-embed plyr-youtube">
-                                            <iframe src="<%- post.youtube_link %>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        </div>
-                                    <% } %>
-                                    
-                                    <div class="post-meta">
-                                        <ul class="comment-share-meta">
-                                            <li>
-                                                <button class="post-comment" data-toggle="modal" data-id="<%- post._id %>" data-target="#commentModal">
-                                                    <i class="bi bi-chat-bubble"></i>
-                                                    <span><%- post.comments.length %> </span>
-                                                </button>
-                                            </li>
-                                        </ul>
                                     </div>
-                                </div>
+                                    <% }) %>
                             </div>
-                        <% }) %>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comment Modal -->
+            <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModal"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="commentLabel">Comment</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="data-info-with-button">
+                                <div class="data-info">
+
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="modal-footer">
+                            <form action="" method="post" id="commentForm">
+                                <img src="/assets/images/profile/profile-small-5.jpg" alt="" class="rounded-circle"
+                                    width="40" height="40">
+                                <input type="text" id="comment" placeholder="Write Something">
+                                <input type="hidden" name="postId" id="postId">
+                                <input type="submit" id="postComment" class="btn button" value="Save">
+                            </form>
                         </div>
                     </div>
-
                 </div>
-            </div>
-        </div>
 
-        <!-- Comment Modal -->
-        <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="commentLabel">Comment</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                <div class="modal-body">
-                    <div class="data-info">
-                        
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <form action="" method="post" id="commentForm">
-                        <img src="/assets/images/profile/profile-small-5.jpg" alt="" class="rounded-circle" width="40" height="40">
-                        <input type="text" id="comment" placeholder="Write Something">
-                        <input type="hidden" name="postId" id="postId">
-                        <input type="submit" id="postComment" class="btn button" value="Save">
-                    </form>
-                </div>
-            </div>
-        </div>
-        
-    </main>
+        </main>
 
-    <!-- Scroll to top start -->
-    <%- include('layouts/scroll.ejs') %> 
-    <!-- Scroll to Top End -->
+        <!-- Scroll to top start -->
+        <%- include('layouts/scroll.ejs') %>
+            <!-- Scroll to Top End -->
 
-    <!-- footer listfriend message include footer in here-->
-    
-    
-    <!-- JS
+            <!-- footer listfriend message include footer in here-->
+
+
+            <!-- JS
 ============================================ -->
 
-    <%- include('layouts/javascript.ejs') %>
-    
-    
-    <script>
-        $('#articleForm').submit(function(e) {
-            e.preventDefault();
-            var article = $('#article').val();
-            axios.post('/postArticle', {
-                article
-            }).then(response => {
-                const post = response.data.data;
-                    $(".timeline-content").prepend(`<div class="card"> \
+            <%- include('layouts/javascript.ejs') %>
+
+
+                <script>
+                    $('#articleForm').submit(function (e) {
+                        e.preventDefault();
+                        var article = $('#article').val();
+                        axios.post('/postArticle', {
+                            article
+                        }).then(response => {
+                            const post = response.data.data;
+                            $(".timeline-content").prepend(`<div class="card"> \
                                     <div class="post-title d-flex align-items-center"> \
                                         <!-- profile picture end --> \
                                         <div class="profile-thumb"> \
                                             <a href="#"> \
                                                 <figure class="profile-thumb-middle">\
-                                                    <img src="`+post.user.image+`" alt="profile picture">\
+                                                    <img src="`+ post.user.image + `" alt="profile picture">\
                                                 </figure>\
                                             </a>\
                                         </div>\
                                         <!-- profile picture end -->\
                                         <div class="posted-author">\
-                                            <h6 class="author"><a href="/user/profile">`+post.user.full_name+`</a></h6>\
-                                            <span class="post-time">`+new Date(post.user.createdAt).getHours() + ":" + new Date(post.user.createdAt).getMinutes() +
-                                                " " + new Date(post.user.createdAt).getDate() + "/" + new Date(post.user.createdAt).getMonth() + "/" + new Date(post.user.createdAt).getFullYear()+` </span>\
+                                            <h6 class="author"><a href="/user/profile">`+ post.user.full_name + `</a></h6>\
+                                            <span class="post-time">`+ new Date(post.user.createdAt).getHours() + ":" + new Date(post.user.createdAt).getMinutes() +
+                                " " + new Date(post.user.createdAt).getDate() + "/" + new Date(post.user.createdAt).getMonth() + "/" + new Date(post.user.createdAt).getFullYear() + ` </span>\
                                         </div>\
                                     </div>\
                                     <!-- post title start -->\
                                     <div class="post-content">\
-                                        <p class="post-desc">`+post.content+`</p>\
+                                        <p class="post-desc">`+ post.content + `</p>\
                                         <div class="post-meta">\
                                             <ul class="comment-share-meta">\
                                                 <li>\
                                                     <button class="post-comment">\
                                                         <i class="bi bi-chat-bubble"></i>\
-                                                        <span>`+post.comments.length+`</span>\
+                                                        <span>`+ post.comments.length + `</span>\
                                                     </button>\
                                                 </li>\
                                             </ul>\
                                         </div>\
                                     </div>\
                                 </div>`);
-                                
-                                $('#article').val(''); 
-                                
-            }).catch(err => {
-                console.log(err)
-            })
-            // $.ajax({
-            //     url: 'http://localhost:3000/postArticle',
-            //     type: 'POST',
-            //     data: {
-            //         article,
-            //     },
-            //     success: function(data){
-            //         console.log(data);
-            //     }, 
-                
-            // });
-        })
-    
-        $('#commentForm').submit(function(e) {
-            e.preventDefault();
-            var comment = $('#comment').val();
-            var postId = $('#postId').val();
-            axios.post('/comment', {
-                postId,
-                comment
-            }).then(response => {
-                const comment = response.data.data;
-                    $(".data-info").prepend(`<div class="data-info-detail">
-                    <img src="`+comment.user.image+`" alt="" class="rounded-circle" width="40" height="40"> 
-                    <div> 
-                        <h6>`+comment.user.full_name+`</h6>
-                        <div>`+comment.comment+`</div>
-                    </div>
-                </div><hr>`);
-                                
-                $('#comment').val(''); 
-                                
-            }).catch(err => {
-                console.log(err)
-            })
-        })
-        
-        $(document).on("click", ".post-comment", function(){
-            $('.data-info').empty();
-            var post = $(this).data('id');
-            axios.get('/post/'+post).then(result => {
-                const post = result.data.data.post;
-                const comments = result.data.data.comments;
-                comments.map(element => {
-                    $('.data-info').append(`<div class="data-info-detail">
-                        <img src="`+element.user.image+`" alt="" class="rounded-circle" width="40" height="40"> 
-                        <div> 
-                            <h6>`+element.user.full_name+`</h6>
-                            <div>`+element.comment+`</div>
+
+                            $('#article').val('');
+
+                        }).catch(err => {
+                            console.log(err)
+                        })
+                        // $.ajax({
+                        //     url: 'http://localhost:3000/postArticle',
+                        //     type: 'POST',
+                        //     data: {
+                        //         article,
+                        //     },
+                        //     success: function(data){
+                        //         console.log(data);
+                        //     }, 
+
+                        // });
+                    })
+
+                    $('#commentForm').submit(function (e) {
+                        e.preventDefault();
+                        var comment = $('#comment').val();
+                        var postId = $('#postId').val();
+                        axios.post('/comment', {
+                            postId,
+                            comment
+                        }).then(response => {
+                            const comment = response.data.data;
+                            $(".data-info").prepend(`
+                    <div class="data-info-with-button">  
+                        <div class="data-info-detail">
+                        <img src="`+ comment.user.image + `" alt="" class="rounded-circle" width="40" height="40"> 
+                            <div> 
+                                <h6>`+ comment.user.full_name + `</h6>
+                                <div>`+ comment.comment + `</div>
+                            </div>  
                         </div>
-                    </div>`)
-                })
-                
-            }).catch(err => {
-                console.log(err)
-            })
-            
-            $(".modal-footer #postId").val(post);
-        })
-    </script>
+                        <div class="post-settings-bar" id="commentOption">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                            <div class="post-settings arrow-shape">
+                                <ul>
+                                    <li><button >delete post</button></li>
+                                    <li><button>edit post</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><hr>`);
+
+                            $('#comment').val('');
+
+                        }).catch(err => {
+                            console.log(err)
+                        })
+                    })
+
+                    $(document).on("click", ".post-comment", function () {
+                        $('.data-info').empty();
+                        var post = $(this).data('id');
+                        axios.get('/post/' + post).then(result => {
+                            const post = result.data.data.post;
+                            const comments = result.data.data.comments;
+                            comments.map(element => {
+                                $('.data-info').append(`
+                                <div class="data-info-with-button" id="`+element._id+`">
+
+                                    <div class="data-info-detail">
+                                        <img src="`+ element.user.image + `" alt="" class="rounded-circle" width="40" height="40"> 
+                                        <div> 
+                                            <h6>`+ element.user.full_name + `</h6>
+                                            <div>`+ element.comment + `</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="post-settings-bar">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <div class="post-settings arrow-shape">
+                                            <ul>
+                                                <li><button onClick='deleteComment("`+ element._id + `")'>delete post</button></li>
+                                                <li><button>edit post</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>`)
+                            })
+
+                        }).catch(err => {
+                            console.log(err)
+                        })
+
+                        $(".modal-footer #postId").val(post);
+                    })
+                </script>
 
 </body>
 
