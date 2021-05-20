@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer')
+var upload = multer({ dest: 'upload/' });
+var type = upload.single('file');
 
 const AdminController = require('../controllers/AdminController');
 
