@@ -7,6 +7,7 @@ const AdminController = require('../controllers/AdminController');
 router.get('/', AdminController.index);
 router.get('/post', AdminController.index);
 
+router.get('/faculty', AdminController.postFaculty);
 router.post('/register', AdminController.postRegister)
 
 // router.get('/post/add', AdminController.getAddPost);

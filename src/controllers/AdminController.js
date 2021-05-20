@@ -21,9 +21,13 @@ function postRegister(request, response, next) {
     console.log(request.body);
 }
 
+function postFaculty(request, response, next) {
+    response.render('admin/faculty');
+}
 module.exports = {
     index,
     getAddPost,
     postAddPost,
     postRegister,
+    postFaculty,
 }
