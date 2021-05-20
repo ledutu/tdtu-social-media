@@ -241,6 +241,24 @@ function deleteComment(id){
 		})
 	}
 }
+function deleteUser(id){
+	if (confirm("Ban muon xoa User nay ?")) {
+		
+		$.ajax({
+			type: "POST",
+			url: "/admin/deleteUser",
+			data: { user_id: id },
+			dataType: "json",
+			success: function (response) {
+				if (response.success == true) {
+					alert("Xoa thanh cong!")
+					$('.table-striped').load('/admin .table-striped');
+				}
+
+			}
+		})
+	}
+}
 var page=1;
 window.onscroll = function () { 
 	if(window.location.pathname.includes("profile/")){
