@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
+const { Faculty } = require('./faculty');
 
 const userSchema = new mongoose.Schema({
-    googleId: { type: String, index: true, default: '', unique: true },
+    googleId: { type: String, index: true, default: '' },
     username: { type: String, index: true, require: true },
     password: { type: String, select: false },
     password_hash: { type: String, select: false },
     full_name: { type: String, unique: false, default: '' },
     birthday: { type: Date, default: '' },
-    email: { type: String, unique: true, index: true, required: true },
-    student_id: { type: String, unique: true, require: true },
+    email: { type: String, index: true, required: true },
+    student_id: { type: String, require: true },
     image: { type: String, default: '' },
     background_image: { type: String, default: '/assets/images/banner/default-background.jpg' },
-    faculty_id: { type: Number },
+    faculty_id: [{ type: Schema.Types.ObjectId, ref: Faculty }],
     introduce: { type: String, default: '' },
     friends: { type: Array, default: [] },
     role: { type: String, require: true },
@@ -25,7 +26,6 @@ userSchema.statics.authenticate = function (username, password, callback) {
         if (err) return callback(err);
         else if (!user) {
             var err = new Error('User not found.');
-            err.status = 401;
             return callback(err);
         }
 

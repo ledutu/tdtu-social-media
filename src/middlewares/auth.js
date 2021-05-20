@@ -1,14 +1,14 @@
 function isLogin(request, response, next) {
-    if (request.isAuthenticated()) {
+    if (request.user) {
         return next();
     }
     response.redirect('/auth');
 }
 
 function isAdmin(request, response, next) {
-    if(request.isAuthenticated()) {
+    if(request.user) {
         if(request.user.role != "0"){
-            next();
+            return next();
         }
     }
     response.redirect('back');

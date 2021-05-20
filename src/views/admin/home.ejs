@@ -27,28 +27,98 @@
 
         <!-- START CONTENT -->
         <div class="content">
-
+            
             <!-- Start Page Header -->
-            <!-- <div class="page-header">
-                <h1 class="title">Dashboard</h1>
-                <ol class="breadcrumb">
-                    <li class="active">This is a quick overview of some features</li>
-                </ol> -->
+            <div class="row">
 
-                <!-- Start Page Header Right Div -->
-                <!-- <div class="right">
-                <div class="btn-group" role="group" aria-label="...">
-                    <a href="index.html" class="btn btn-light">Dashboard</a>
-                    <a href="#" class="btn btn-light"><i class="fa fa-refresh"></i></a>
-                    <a href="#" class="btn btn-light"><i class="fa fa-search"></i></a>
-                    <a href="#" class="btn btn-light" id="topstats"><i class="fa fa-line-chart"></i></a>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+            
+                    <div class="panel-title">
+                        Add User
+                        <ul class="panel-tools">
+                            <li><a class="icon minimise-tool"><i class="fa fa-minus"></i></a></li>
+                            <li><a class="icon expand-tool"><i class="fa fa-expand"></i></a></li>
+                            <li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>
+                        </ul>
+                    </div>
+            
+                    <div class="panel-body">
+                        <form class="form-horizontal" action="/admin/register">
+                            <div class="form-group">
+                              <label for="input002" class="col-sm-2 control-label form-label">Username</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" name="username">
+                              </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="input002" class="col-sm-2 control-label form-label">Password</label>
+                                <div class="col-sm-10">
+                                  <input type="password" class="form-control" name="password">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="input002" class="col-sm-2 control-label form-label">Full name</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="full_name">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="input002" class="col-sm-2 control-label form-label">Email</label>
+                                <div class="col-sm-10">
+                                  <input type="email" class="form-control" name="email">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="input002" class="col-sm-2 control-label form-label">Image</label>
+                                <div class="col-sm-10">
+                                  <input type="file" class="form-control" name="image">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label form-label">Faculty</label>
+                                <div class="col-sm-10">
+                                  <select class="selectpicker" name="faculty_id">
+                                      <% faculty.forEach(fac => { %>
+                                        <option value="<%- fac._id %> "><%- fac.name %> </option>
+                                      <% }) %>
+                                    </select>                  
+                                </div>
+                              </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label form-label">Role</label>
+                                <div class="col-sm-10">
+                                  <select class="selectpicker" name="role">
+                                      <option value="1">Admin</option>
+                                      <option value="0">User</option>
+                                      <option value="2">Faculty</option>
+                                    </select>                  
+                                </div>
+                            </div>
+                            
+                            <div class="">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-11">
+                                    <input type="submit"class="btn btn-primary" name="add" value="Add">
+                                    <input type="submit"class="btn btn-primary" name="search" value="Search">
+                                </div>
+                            </div>
+                            
+                          </form> 
+            
+                        </div>
+                    </div>
                 </div>
-                </div> -->
-                <!-- End Page Header Right Div -->
+            </div>
 
-            <!-- </div> -->
             <!-- End Page Header -->
-
+            
 
             <!-- START CONTAINER -->
             <div class="container-widget">
@@ -63,7 +133,7 @@
                                 Filter by : 
                                 <select class="form-select form-select-lg admin-panel__select" aria-label="Default select example">
                                     <option selected="selected" value="all">Tất cả</option>
-                                    <option value="">qweqwe qweqweqwe qweqweqe qweqweqe qweqw</option>
+                                    <option value="">Le Duc Tung</option>
                                 </select>
                             </div>
                         </div>
@@ -75,18 +145,21 @@
                                     <tr>
                                         <td>Username</td>
                                         <td>Full name</td>
-                                        <td>Categoris</td>
+                                        <td>Email</td>
+                                        <td>Student ID</td>
+                                        <td>Faculty</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for( let index = 0; index < 10; index++ ) { %>
-                                    
+                                    <% users.forEach(usr => { %>
                                         <tr>
-                                            <td>Kode Gaming Laptop</td>
-                                            <td>John Doe</td>
-                                            <td>As we got further and further away, it [the Earth] diminished in size.</td>
+                                            <td><%- usr.username || "No data" %></td>
+                                            <td><%- usr.full_name || "No data" %></td>
+                                            <td><%- usr.email || "No data" %></td>
+                                            <td><%- usr.email.split("@")[0] || "No data" %></td>
+                                            <td><%- usr.faculty_id || "No data"%></td>
                                         </tr>
-                                    <% } %>
+                                    <% }) %>
                                         
                                 </tbody>
                             </table>

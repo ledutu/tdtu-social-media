@@ -1,7 +1,13 @@
 var express = require('express');
+const { Faculty } = require('../models/faculty');
+const { User } = require('../models/user');
 
-function index(request, response) {
-    response.render('admin/home');
+async function index(request, response) {
+    request.app.locals.user = request.user;
+    faculty = await Faculty.find({});
+    users = await User.find({}).populate('faculty_id');
+    console.log(users)
+    response.render('admin/home', { faculty, users });
 }
 
 function getAddPost(request, response, next) {
@@ -12,6 +18,13 @@ function postAddPost(request, response, next) {
     // response.render('')
 }
 
+function postRegister(request, response, next) {
+
+}
+
 module.exports = {
     index,
+    getAddPost,
+    postAddPost,
+    postRegister,
 }
