@@ -85,6 +85,20 @@ async function addFaculty(request, response) {
     return response.render('admin/faculty');
 }
 
+async function deleteUser(req, res) {
+    const { user_id } = req.body;
+    await User.findByIdAndDelete(user_id, (err) => {
+        if (!err) {
+            return res.json({
+                success: true,
+            })
+        }
+        return res.json({
+            success: false,
+        })
+    })
+}
+
 module.exports = {
     index,
     getAddPost,
@@ -92,4 +106,5 @@ module.exports = {
     postRegister,
     postFaculty,
     addFaculty,
+    deleteUser,
 }

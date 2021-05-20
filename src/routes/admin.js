@@ -13,6 +13,7 @@ router.get('/post', AdminController.index);
 router.get('/faculty', AdminController.postFaculty);
 router.post('/register', AdminController.postRegister);
 
+router.post('/deleteUser', AdminController.deleteUser);
 router.post('/addFaculty', AdminController.addFaculty);
 
 // router.get('/post/add', AdminController.getAddPost);
