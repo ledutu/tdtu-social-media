@@ -53,6 +53,20 @@ async function deletePost(req, res) {
     })
 }
 
+async function deleteComment(req, res) {
+    const { comment_id } = req.body;
+    await Comment.findByIdAndDelete(comment_id, (err) => {
+        if (!err) {
+            return res.json({
+                success: true,
+            })
+        }
+        return res.json({
+            success: false,
+        })
+    })
+}
+
 async function postComment(request, response) {
 
     const { comment, postId } = request.body;
@@ -99,4 +113,5 @@ module.exports = {
     postComment,
     deletePost,
     getPostDetail,
+    deleteComment,
 }

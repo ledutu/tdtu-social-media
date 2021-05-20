@@ -223,6 +223,24 @@ function deletePost(id){
 		})
 	}
 }
+function deleteComment(id){
+	if (confirm("Ban muon xoa comment nay ?")) {
+		
+		$.ajax({
+			type: "POST",
+			url: "/deleteComment",
+			data: { comment_id: id },
+			dataType: "json",
+			success: function (response) {
+				if (response.success == true) {
+					alert("Xoa thanh cong!")
+					$('#'+id).remove();
+				}
+
+			}
+		})
+	}
+}
 var page=1;
 window.onscroll = function () { 
 	if(window.location.pathname.includes("profile/")){
