@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label form-label">Faculty</label>
                                 <div class="col-sm-10">
-                                  <select class="selectpicker" name="faculty_id">
+                                  <select class="selectpicker" name="faculty_id" data-live-search="true">
                                       <% faculty.forEach(fac => { %>
                                         <option value="<%- fac._id %> "><%- fac.name %> </option>
                                       <% }) %>
@@ -94,11 +94,11 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label form-label">Role</label>
                                 <div class="col-sm-10">
-                                  <select class="selectpicker" name="role">
-                                      <option value="1">Admin</option>
-                                      <option value="0">User</option>
-                                      <option value="2">Faculty</option>
-                                    </select>                  
+                                    <select class="selectpicker" name="role" data-live-search="true">
+                                        <option value="1">Admin</option>
+                                        <option value="0">User</option>
+                                        <option value="2">Faculty</option>
+                                    </select>                   
                                 </div>
                             </div>
                             
@@ -126,18 +126,6 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
-                
-                        <div class="panel-title admin-panel__title">
-                            Account List
-                            <div class="admin-panel__filter"> 
-                                Filter by : 
-                                <select class="form-select form-select-lg admin-panel__select" aria-label="Default select example">
-                                    <option selected="selected" value="all">Tất cả</option>
-                                    <option value="">Le Duc Tung</option>
-                                </select>
-                            </div>
-                        </div>
-                
                         <div class="panel-body table-responsive">
                 
                             <table class="table table-striped">
@@ -148,16 +136,27 @@
                                         <td>Email</td>
                                         <td>Student ID</td>
                                         <td>Faculty</td>
+                                        <td>Function</td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% users.forEach(usr => { %>
-                                        <tr>
+                                        <tr id="<%- usr._id %> ">
                                             <td><%- usr.username || "No data" %></td>
                                             <td><%- usr.full_name || "No data" %></td>
                                             <td><%- usr.email || "No data" %></td>
                                             <td><%- usr.email.split("@")[0] || "No data" %></td>
-                                            <td><%- usr.faculty_id || "No data"%></td>
+                                            <td>
+                                            <% if (usr.faculty_id.length > 0) { %>
+                                                    <% usr.faculty_id.forEach(element => { %>
+                                                        <option value=""><%- element.name %> </option>                                        
+                                                    <% }) %>
+                                            <% } %>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary" onclick="">Edit</button>
+                                                <button class="btn btn-danger" onclick="">Delete</button>
+                                            </td>
                                         </tr>
                                     <% }) %>
                                         

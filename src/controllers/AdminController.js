@@ -6,7 +6,6 @@ async function index(request, response) {
     request.app.locals.user = request.user;
     faculty = await Faculty.find({});
     users = await User.find({}).populate('faculty_id');
-    console.log(users)
     response.render('admin/home', { faculty, users });
 }
 
@@ -19,7 +18,7 @@ function postAddPost(request, response, next) {
 }
 
 function postRegister(request, response, next) {
-
+    console.log(request.body);
 }
 
 module.exports = {
