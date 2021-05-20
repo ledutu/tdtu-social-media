@@ -44,18 +44,18 @@
                     </div>
             
                     <div class="panel-body">
-                        <form class="form-horizontal" action="/admin/register">
+                        <form class="form-horizontal" action="/admin/addFaculty" method="POST">
                             <div class="form-group">
                               <label for="input002" class="col-sm-2 control-label form-label">Faculty name</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control" name="facultyname">
+                                <input type="text" class="form-control" name="name">
                               </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="input002" class="col-sm-2 control-label form-label">Faculty key</label>
                                 <div class="col-sm-10">
-                                  <input type="password" class="form-control" name="password">
+                                  <input type="text" class="form-control" name="key_name">
                                 </div>
                             </div>
                             
@@ -63,7 +63,7 @@
                             <div class="">
                                 <div class="col-sm-1"></div>
                                 <div class="col-sm-11">
-                                    <input type="submit"class="btn btn-primary" name="add" value="Add">
+                                    <button type="submit"class="btn btn-primary" >Add</button>
                                     <input type="submit"class="btn btn-primary" name="search" value="Search">
                                 </div>
                             </div>
@@ -105,13 +105,16 @@
                                         <td>Key Faculty</td>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <% faculties.forEach(faculty=>{ %>
+                                    <tbody>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><%- faculty._id %></td>
+                                            <td><%- faculty.name %></td>
+                                            <td><%- faculty.key_name %></td>
                                         </tr>
                                 </tbody>
+                                <% }) %>
+                                
                             </table>
                         </div>
                 

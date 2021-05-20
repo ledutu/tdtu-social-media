@@ -8,7 +8,9 @@ router.get('/', AdminController.index);
 router.get('/post', AdminController.index);
 
 router.get('/faculty', AdminController.postFaculty);
-router.post('/register', AdminController.postRegister)
+router.post('/register', AdminController.postRegister);
+
+router.post('/addFaculty', AdminController.addFaculty);
 
 // router.get('/post/add', AdminController.getAddPost);
 // router.post('/post/add', AdminController.postAddPost);
