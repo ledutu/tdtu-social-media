@@ -16,6 +16,9 @@ router.post('/register', AdminController.postRegister);
 router.post('/deleteUser', AdminController.deleteUser);
 router.post('/addFaculty', AdminController.addFaculty);
 
+router.get('/notification', AdminController.getNotification)
+router.post('/notification', AdminController.postNotification)
+
 // router.get('/post/add', AdminController.getAddPost);
 // router.post('/post/add', AdminController.postAddPost);
 
