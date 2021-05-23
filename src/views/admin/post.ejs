@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Kode is a Premium Bootstrap Admin Template, It's responsive, clean coded and mobile friendly">
+        <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
+        <title>Post</title>
+
+        <!-- ========== Css Files ========== -->
+        <%- include('layouts/head') %>
+        
+    </head>
+    <body>
+    <!-- Start Page Loading -->
+        <%- include('layouts/loading') %>
+        <!-- End Page Loading -->
+
+        <!-- START TOP -->
+        <%- include('layouts/header') %> 
+        <!-- END TOP -->
+
+        <!-- START SIDEBAR -->
+        <%- include('layouts/left-menu') %> 
+        <!-- END SIDEBAR -->
+
+        <!-- START CONTENT -->
+        <div class="content">
+            
+
+            <!-- START CONTAINER -->
+            <div class="container-widget">
+                <!-- Start Fifth Row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                
+                        <div class="panel-body table-responsive">
+                
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Content</td>
+                                        <td>User</td>
+                                        <td>Function</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% post.forEach(p => { %>
+                                        <tr>
+                                            <td><%- p.content %></td>
+                                            <td><%- p.user %></td>
+                                            <td>
+                                                <a href="/admin/delete-post/<%- p._id %> " class="btn btn-danger" onclick="confirm('Bạn có muốn xóa hay không?')">Delete</a>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                
+                        </div>
+                    </div>
+                    <!-- End Panel -->
+
+                </div>
+                <!-- End Fifth Row -->
+
+            </div>
+            <!-- END CONTAINER -->
+
+        </div>
+        <!-- End Content -->
+
+        <%- include('layouts/javascript') %>
+        
+    </body>
+</html>

@@ -22,7 +22,7 @@
     <main>
 
         <div class="main-wrapper">
-            <div class="profile-banner-large bg-img" data-bg="<%- user.background_image %> ">
+            <div class="profile-banner-large bg-img" data-bg="<%- profileUser.background_image %> ">
             </div>
             <div class="profile-menu-area bg-white">
                 <div class="container">
@@ -30,8 +30,8 @@
                         <div class="col-lg-3 col-md-3">
                             <div class="profile-picture-box">
                                 <figure class="profile-picture">
-                                    <a href="profile.html">
-                                        <img src="<%- user.image %> " alt="profile picture" width="96px" height="96px">
+                                    <a href="#">
+                                        <img src="<%- profileUser.image %> " alt="profile picture" width="96px" height="96px">
                                     </a>
                                 </figure>
                             </div>
@@ -42,15 +42,9 @@
                                     <nav>
                                         <ul class="main-menu">
                                             <li class="active"><a href="/user/profile"><%=__('timeline')%></a></li>
-                                            <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li>
                                         </ul>
                                     </nav>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-3 d-none d-md-block">
-                            <div class="profile-edit-panel">
-                                <button class="edit-btn"><%=__('edit profile')%></button>
                             </div>
                         </div>
                     </div>
@@ -62,14 +56,12 @@
                         <aside class="widget-area">
                             <!-- widget single item start -->
                             <div class="card widget-item">
-                                <h4 class="widget-title"><%- user.full_name %> </h4>
+                                <h4 class="widget-title"><%- profileUser.full_name %> </h4>
                                 <div class="widget-body">
                                     <div class="about-author">
-                                        <p><%- user.introduce || 'Nothing to show' %> </p>
+                                        <p><%- profileUser.introduce || 'Nothing to show' %> </p>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="bi bi-office-bag"></i><%- user.faculty_id %> </a></li>
-                                            <li><a href="#"><i class="bi bi-home"></i><%- user.email.split('@')[0] %> </a></li>
-                                            <li><a href="#"><i class="bi bi-location-pointer"></i><%- user.birthday %> </a></li>
+                                            <li><a href="#"><i class="bi bi-home"></i><%- profileUser.email.split('@')[0] %> </a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -79,7 +71,7 @@
                         </aside>    
                     </div>
     
-                    <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="col-lg-9 order-1 order-lg-2">
                         <!-- share box start -->
                         <div class="card card-small">
                             <div class="share-box-inner">
@@ -87,236 +79,171 @@
                                 <div class="profile-thumb">
                                     <a href="#">
                                         <figure class="profile-thumb-middle">
-                                            <img src="/assets/images/profile/profile-small-37.jpg" alt="profile picture">
+                                            <img src="<%- user.image %> " alt="profile picture">
                                         </figure>
                                     </a>
                                 </div>
                                 <!-- profile picture end -->
-    
+
                                 <!-- share content box start -->
                                 <div class="share-content-box w-100">
-                                    <form class="share-text-box">
-                                        <textarea name="share" class="share-text-field" aria-disabled="true" placeholder="<%=__('Say Something')%>" data-toggle="modal" data-target="#textbox" id="email"></textarea>
-                                        <button class="btn-share" type="submit"><%=__('share')%></button>
+                                    <form class="share-text-box" action="" id="articleForm">
+                                        <textarea name="article" id="article" class="share-text-field"
+                                            aria-disabled="true" placeholder="Say Something" data-toggle="modal"
+                                            data-target="#textbox"></textarea>
+                                        <button class="btn-share" type="submit">share</button>
                                     </form>
                                 </div>
                                 <!-- share content box end -->
-                                <!-- Modal start -->
-                                <div class="modal fade" id="textbox" aria-labelledby="textbox">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Share Your Mood</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body custom-scroll">
-                                                <textarea name="share" class="share-field-big custom-scroll" placeholder="Say Something"></textarea>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="post-share-btn" data-dismiss="modal">cancel</button>
-                                                <button type="button" class="post-share-btn">post</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal end -->
                             </div>
                         </div>
                         <!-- share box end -->
+
                         <div class="timeline-content">
-                        <!-- post status start -->
-                        <% posts.forEach(post => { %>
-                            <div class="card card-content">
-                                <!-- post title start -->
-                                <div class="post-title d-flex align-items-center">
-                                    <!-- profile picture end -->
-                                    <div class="profile-thumb">
-                                        <a href="#">
-                                            <figure class="profile-thumb-middle">
-                                                <img src="<%- post.user.image %>" alt="profile picture">
-                                                <%- post.user %>
-                                            </figure>
-                                        </a>
-                                    </div>
-                                    <!-- profile picture end -->
-    
-                                    <div class="posted-author">
-                                        <h6 class="author"><a href="/user/profile/<%= post.user._id%>" ><%- post.user.full_name %></a></h6>
-                                        <span class="post-time"><%- new Date(post.user.createdAt).getHours() + ":" + new Date(post.user.createdAt).getMinutes() +
-                                            " " + new Date(post.user.createdAt).getDate() + "/" + new Date(post.user.createdAt).getMonth() + "/" + new Date(post.user.createdAt).getFullYear()%> </span>
-                                    </div>
-                                    <div class="post-settings-bar">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <div class="post-settings arrow-shape">
-                                            <ul>
-                                                <li><button onclick='deletePost("<%= post._id %>")'>delete post</button></li>
-                                                <li><button>edit post</button></li>
-                                            </ul>
+                            <% posts.forEach(post=> { %>
+                                <div class="card card-content">
+                                    <!-- post title start -->
+                                    <div class="post-title d-flex align-items-center">
+                                        <!-- profile picture end -->
+                                        <div class="profile-thumb">
+                                            <a href="#">
+                                                <figure class="profile-thumb-middle">
+                                                    <img src="<%- post.user.image || '/assets/images/photos/no-image.png' %>" alt="profile picture">
+                                                </figure>
+                                            </a>
+                                        </div>
+                                        <!-- profile picture end -->
+
+                                        <div class="posted-author">
+                                            <h6 class="author"><a href="/user/profile/<%= post.user._id%>">
+                                                    <%- post.user.full_name %>
+                                                </a></h6>
+                                            <span class="post-time">
+                                                <%- new Date(post.user.createdAt).getHours() + ":" + new
+                                                    Date(post.user.createdAt).getMinutes() + " " + new
+                                                    Date(post.user.createdAt).getDate() + "/" + new
+                                                    Date(post.user.createdAt).getMonth() + "/" + new
+                                                    Date(post.user.createdAt).getFullYear()%>
+                                            </span>
+                                        </div>
+                                        <div class="post-settings-bar">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <div class="post-settings arrow-shape">
+                                                <ul>
+                                                    <li><button onclick='deletePost("<%= post._id %>")'>delete post</button></li>
+                                                    <li><button>edit post</button></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- post title start -->
-                                <div class="post-content">
-                                    <p class="post-desc"><%- post.content %></p>
-                                    <% if (post.image.length === 1) { %>
-                                        <div class="post-thumb-gallery">
-                                            <figure class="post-thumb img-popup">
-                                                <a href="<%- post.image[0] %>">
-                                                    <img src="<%- post.image[0] %>" alt="post image">
-                                                </a>
-                                            </figure>
-                                        </div> 
-                                        
-                                    <% } else if (post.image.length > 1) { %>
-                                        <div class="post-thumb-gallery img-gallery">
-                                            <div class="row no-gutters">
-                                                <div class="col-8">
-                                                    <figure class="post-thumb">
-                                                        <a class="gallery-selector" href="<%- post.image[0] %>">
-                                                            <img src="<%- post.image[0] %>" alt="post image">
-                                                        </a>
-                                                    </figure>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="row">
-                                                        <% for( let i = 1; i < 10; i++ ) { %>
-                                                        <div class="col-12" style="display:<%= i >= 4? 'none': '' %>">
+                                    <!-- post title start -->
+                                    <div class="post-content">
+                                        <p class="post-desc">
+                                            <%- post.content %>
+                                        </p>
+                                        <% if (post.image.length===1) { %>
+                                            <div class="post-thumb-gallery">
+                                                <figure class="post-thumb img-popup">
+                                                    <a href="<%- post.image[0] %>">
+                                                        <img src="<%- post.image[0] %>" alt="post image">
+                                                    </a>
+                                                </figure>
+                                            </div>
+
+                                            <% } else if (post.image.length> 1) { %>
+                                                <div class="post-thumb-gallery img-gallery">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-8">
                                                             <figure class="post-thumb">
-                                                                <a class="gallery-selector" href="<%- post.image[1] %>">
-                                                                    <img src="<%- post.image[1] %>" alt="post image">
+                                                                <a class="gallery-selector"
+                                                                    href="<%- post.image[0] %>">
+                                                                    <img src="<%- post.image[0] %>"
+                                                                        alt="post image">
                                                                 </a>
                                                             </figure>
                                                         </div>
-                                                        <% } %>
+                                                        <div class="col-4">
+                                                            <div class="row">
+                                                                <% for( let i=1; i < 10; i++ ) { %>
+                                                                    <div class="col-12"
+                                                                        style="display:<%= i >= 4? 'none': '' %>">
+                                                                        <figure class="post-thumb">
+                                                                            <a class="gallery-selector"
+                                                                                href="<%- post.image[1] %>">
+                                                                                <img src="<%- post.image[1] %>"
+                                                                                    alt="post image">
+                                                                            </a>
+                                                                        </figure>
+                                                                    </div>
+                                                                    <% } %>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    
-                                    <% } else if (post.youtube_link) { %>
-                                        <div class="plyr__video-embed plyr-youtube">
-                                            <iframe src="<%- post.youtube_link %>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        </div>
-                                    <% } %>
-                                    
-                                    <div class="post-meta">
-                                        <ul class="comment-share-meta">
-                                            <li>
-                                                <button class="post-comment" data-toggle="modal" data-id="<%- post._id %>" data-target="#commentModal">
-                                                    <i class="bi bi-chat-bubble"></i>
-                                                    <span><%- post.comments.length %> </span>
-                                                </button>
-                                            </li>
-                                        </ul>
+
+                                                <% } else if (post.youtube_link) { %>
+                                                    <div class="plyr__video-embed plyr-youtube">
+                                                        <iframe src="<%- post.youtube_link %>"
+                                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                            allowfullscreen></iframe>
+                                                    </div>
+                                                    <% } %>
+
+                                                        <div class="post-meta">
+                                                            <ul class="comment-share-meta">
+                                                                <li>
+                                                                    <button class="post-comment" data-toggle="modal"
+                                                                        data-id="<%- post._id %>"
+                                                                        data-target="#commentModal">
+                                                                        <i class="bi bi-chat-bubble"></i>
+                                                                        <span>
+                                                                            <%- post.comments.length %>
+                                                                        </span>
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <% }) %><!-- post status end -->
+                                <% }) %>
                         </div>
-                        <!-- post status start -->
-                        <!-- post status end -->
                     </div>
     
-                    <div class="col-lg-3 order-3">
-                        <aside class="widget-area">
-                            <!-- widget single item start -->
-                            <div class="card widget-item">
-                                <h4 class="widget-title"><%=__('Recent Notifications')%></h4>
-                                <div class="widget-body">
-                                    <ul class="like-page-list-wrapper">
-                                        <li class="unorder-list">
-                                            <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src="/assets/images/profile/profile-small-9.jpg" alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
-                                            <!-- profile picture end -->
-    
-                                            <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                                                <p class="list-subtitle">5 min ago</p>
-                                            </div>
-                                        </li>
-                                        <li class="unorder-list">
-                                            <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src="/assets/images/profile/profile-small-35.jpg" alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
-                                            <!-- profile picture end -->
-    
-                                            <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                                                <p class="list-subtitle">10 min ago</p>
-                                            </div>
-                                        </li>
-                                        <li class="unorder-list">
-                                            <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src="/assets/images/profile/profile-small-15.jpg" alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
-                                            <!-- profile picture end -->
-    
-                                            <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                                                <p class="list-subtitle">18 min ago</p>
-                                            </div>
-                                        </li>
-                                        <li class="unorder-list">
-                                            <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src="/assets/images/profile/profile-small-6.jpg" alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
-                                            <!-- profile picture end -->
-    
-                                            <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                                                <p class="list-subtitle">25 min ago</p>
-                                            </div>
-                                        </li>
-                                        <li class="unorder-list">
-                                            <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src="/assets/images/profile/profile-small-34.jpg" alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
-                                            <!-- profile picture end -->
-    
-                                            <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                                                <p class="list-subtitle">39 min ago</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- widget single item end -->
-                        </aside>
-                    </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Comment Modal -->
+        <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModal"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentLabel">Comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="data-info">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="post" id="commentForm">
+                        <img src="<%- user.image %>" alt="" class="rounded-circle"
+                            width="40" height="40">
+                        <input type="text" id="comment" placeholder="Write Something">
+                        <input type="hidden" name="postId" id="postId">
+                        <input type="submit" id="postComment" class="btn button" value="Save">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     
     </main>
 
@@ -331,6 +258,8 @@
 ============================================ -->
 
     <%- include('layouts/javascript.ejs') %>
+    
+    <script src="/assets/js/home.js"></script>
 
 </body>
 

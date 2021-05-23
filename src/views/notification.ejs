@@ -8,33 +8,7 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon -->
-    <style>
-        a {
-          text-decoration: none;
-          display: inline-block;
-          padding: 8px 16px;
-        }
-        
-        a:hover {
-          background-color: #ddd;
-          color: black;
-        }
-        
-        .previous {
-          background-color: #f1f1f1;
-          color: black;
-        }
-        
-        .next {
-          background-color: #04AA6D;
-          color: white;
-        }
-        
-        .round {
-          border-radius: 50%;
-        }
-        </style>
+    
     <%- include('layouts/head') %>
 
 </head>
@@ -51,19 +25,33 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="card">
-                            <form action="">
-                                <input type="text" placeholder="Search faculty notification" style="margin-bottom: 10px;">
-                                <input type="submit" value="Filter">
+                            <form action="/notification" class="form-container" method="GET">
+                                
+                                <div class="">
+                                    <label for="cars">Choose faculty</label>
+
+                                    <select name="faculty_id">
+                                        <% faculty.forEach(e => { %>
+                                            <option value=<%- e._id %> ><%- e.name %>  </option>
+                                        <% }) %>
+                                    </select>     
+                                </div>             
+                                
+                                <input type="submit" value="Filter" style="margin-top: 20px;">
                             </form>
                         </div>
                     </div>
                     <div class="col-lg-9">
-                        <% for( let i = 0; i < 5; i++ ) { %>
-                        <div class="card">
-                            <h4>title</h4>
-                            <p>Khoa</p>
-                        </div>
-                        <% } %>
+                        <% notification.forEach(noti => {%>
+                            <a class="card" href="/notification/detail/<%- noti._id %> ">
+                                <h4><%- noti.title %> </h4>
+                                <ul>
+                                    <% noti.faculty.forEach(fac => { %>
+                                        <li><%- fac.name %> </li>
+                                    <% }) %>
+                                </ul>
+                            </a>
+                        <% }) %>
                     </div>
                 </div>
             </div>

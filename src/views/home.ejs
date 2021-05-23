@@ -30,18 +30,18 @@
                                     <h4 class="widget-title">latest top news</h4>
                                     <div class="widget-body">
                                         <ul class="like-page-list-wrapper">
-                                            <% for( let i=0; i < 5; i++ ) { %>
+                                            <% notification.forEach(noti => {%>
 
-                                                <li class="unorder-list">
-                                                    <!-- profile picture end -->
+                                            <li class="unorder-list">
+                                                <!-- profile picture end -->
 
-                                                    <div class="unorder-list-info">
-                                                        <h3 class="list-title" width="50px"><a href="#">CNTT</a></h3>
-                                                        <p class="sub-list">Notification Content</p>
-                                                        <p class="list-subtitle">2 min ago</p>
-                                                    </div>
-                                                </li>
-                                                <% } %>
+                                                <a href="/notification/detail/<%- noti._id %>">
+                                                    <h3 class="list-title" width="50px"><%- noti.title %></a></h3>
+                                                    
+                                                    <!-- <p class="sub-list">Notification Content</p>
+                                                    <p class="list-subtitle">2 min ago</p> -->
+                                                </a>
+                                            <% }) %>
                                     </div>
                                 </div>
                                 <!-- widget single item end -->
@@ -85,7 +85,7 @@
                                             <div class="profile-thumb">
                                                 <a href="#">
                                                     <figure class="profile-thumb-middle">
-                                                        <img src="<%- post.user.image %>" alt="profile picture">
+                                                        <img src="<%- post.user.image || '/assets/images/photos/no-image.png' %>" alt="profile picture">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -103,17 +103,21 @@
                                                         Date(post.user.createdAt).getFullYear()%>
                                                 </span>
                                             </div>
-                                            <div class="post-settings-bar">
-                                                <span></span>
-                                                <span></span>
-                                                <span></span>
-                                                <div class="post-settings arrow-shape">
-                                                    <ul>
-                                                        <li><button onclick='deletePost("<%= post._id %>")'>delete post</button></li>
-                                                        <li><button>edit post</button></li>
-                                                    </ul>
+                                            <% if (post.user._id == user._id) { %>
+                                             
+                                                <div class="post-settings-bar">
+                                                    <span></span>
+                                                    <span></span>
+                                                    <span></span>
+                                                    <div class="post-settings arrow-shape">
+                                                        <ul>
+                                                            <li><button onclick='deletePost("<%= post._id %>")'>delete post</button></li>
+                                                            <li><button>edit post</button></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                
+                                            <% } %>
                                         </div>
                                         <!-- post title start -->
                                         <div class="post-content">
@@ -205,11 +209,9 @@
                         </div>
 
                         <div class="modal-body">
-                            <div class="data-info-with-button">
-                                <div class="data-info">
+                            <div class="data-info">
 
-                                </div>
-                            </div>   
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <form action="" method="post" id="commentForm">
@@ -222,6 +224,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
         </main>
 

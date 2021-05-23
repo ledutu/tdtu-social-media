@@ -1,11 +1,10 @@
 var express = require('express');
 const { Faculty } = require('../models/faculty');
 const { User } = require('../models/user');
+const { Post } = require('../models/post');
 const { Notification } = require('../models/notification');
 const Response = require('../utils/response');
 const bcrypt = require('bcrypt');
-const Resize = require('../utils/resize');
-const path = require('path')
 
 async function index(request, response) {
     request.app.locals.session = request.session;
@@ -35,25 +34,15 @@ async function postRegister(request, response, next) {
         role,
     } = request.body;
 
-    // console.log('image', request.file);
-
-    // response.send(request.file)
-
     const existUser = await User.findOne({ username });
-
-    // // folder upload
-    // const imagePath = path.join(__dirname, '/public/assets/images/upload/');
-    // // call class Resize
-    // const fileUpload = new Resize(imagePath);
-
-    // const filename = await fileUpload.save(image.buffer);
 
     if (existUser) {
         request.session.err = 'Username exists'
         return response.redirect('back')
     };
 
-    password_hash = await bcrypt.hashSync(password, 12);
+    const salt = bcrypt.genSaltSync(12);
+    const password_hash = bcrypt.hashSync(password, salt);
 
     const user = new User({
         username,
@@ -72,8 +61,10 @@ async function postRegister(request, response, next) {
 
 }
 
-function postFaculty(request, response, next) {
-    response.render('admin/faculty');
+async function postFaculty(request, response, next) {
+
+    faculties = await Faculty.find({});
+    response.render('admin/faculty', { faculties });
 }
 
 async function addFaculty(request, response) {
@@ -100,39 +91,59 @@ async function deleteUser(req, res) {
 }
 
 async function getNotification(request, response) {
-    faculty = await Faculty.find({});
+    faculty = await User.findById(request.user._id).populate('faculty_id');
     notification = await Notification.find({}).populate('user_id').populate('faculty');
-    
-    console.log(notification)
-
-    return response.render('admin/notification', { faculty, notification })
+    return response.render('admin/notification', { faculty: faculty.faculty_id, notification })
 }
 
 async function postNotification(request, response) {
     // faculty = await Faculty.find({});
 
     const { content, faculty_id, title } = request.body;
-    
+
     const notification = new Notification({
         title,
         content,
         faculty: faculty_id,
         user_id: request.user._id,
     });
-    
+
     await notification.save();
-    
+
+    return response.redirect('back');
+}
+
+async function deleteNotification(request, response) {
+    const { id } = request.params;
+
+    await Notification.findByIdAndDelete(id);
+
+    return response.redirect('back');
+}
+
+async function getPost(request, response) {
+    const post = await Post.find({});
+
+    return response.render('admin/post', { post })
+}
+
+async function deletePost(request, response) {
+    const { id } = request.params;
+
+    await Post.findByIdAndDelete(id);
+
     return response.redirect('back');
 }
 
 module.exports = {
     index,
-    getAddPost,
-    postAddPost,
+    getPost,
     postRegister,
     postFaculty,
     addFaculty,
     deleteUser,
     getNotification,
     postNotification,
+    deleteNotification,
+    deletePost
 }

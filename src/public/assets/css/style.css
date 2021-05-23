@@ -3526,6 +3526,7 @@ textarea:focus {
 
 .data-info-detail {
   margin-bottom: 25px;
+  display: flex;
 }
 
 .mob-frnd-search-inner {

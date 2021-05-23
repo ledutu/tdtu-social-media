@@ -79,7 +79,6 @@
                                 <div class="col-sm-1"></div>
                                 <div class="col-sm-11">
                                     <button type="submit"class="btn btn-primary" >Add</button>
-                                    <input type="submit"class="btn btn-primary" name="search" value="Search">
                                 </div>
                             </div>
                             
@@ -100,16 +99,6 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                 
-                        <div class="panel-title admin-panel__title">
-                            Account List
-                            <div class="admin-panel__filter"> 
-                                Filter by : 
-                                <select class="form-select form-select-lg admin-panel__select" aria-label="Default select example">
-                                    <option selected="selected" value="all">Tất cả</option>
-                                </select>
-                            </div>
-                        </div>
-                
                         <div class="panel-body table-responsive">
                 
                             <table class="table table-striped">
@@ -124,7 +113,7 @@
                                 </thead>
                                 <tbody>
                                     <% notification.forEach(e => { %>
-                                        <tr>
+                                        <tr class="<%- e._id %> ">
                                             <td><%- e.title %> </td>
                                             <td><%- e.content %></td>
                                             <td>
@@ -136,8 +125,8 @@
                                             </td>
                                             <td><%- e.user_id.full_name %> </td>
                                             <td>
-                                                <button class="btn btn-primary" onclick="">Edit</button>
-                                                <button class="btn btn-danger" onclick="">Delete</button>
+                                                <!-- <button class="btn btn-primary" id="handleEditNotification" onclick="">Edit</button> -->
+                                                <a href="/admin/delete-notification/<%- e._id %> " class="btn btn-danger" onclick="confirm('Bạn có muốn xóa hay không?')">Delete</a>
                                             </td>
                                         </tr>
                                     <% }) %>
@@ -167,6 +156,7 @@
                 .catch( error => {
                     console.error( error );
                 } );
+            
         </script>
     </body>
 </html>

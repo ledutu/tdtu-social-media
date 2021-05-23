@@ -1,14 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer')
-var upload = multer({ dest: 'upload/' });
-var type = upload.single('file');
 
 const AdminController = require('../controllers/AdminController');
 
 /* GET users listing. */
 router.get('/', AdminController.index);
-router.get('/post', AdminController.index);
 
 router.get('/faculty', AdminController.postFaculty);
 router.post('/register', AdminController.postRegister);
@@ -18,9 +14,9 @@ router.post('/addFaculty', AdminController.addFaculty);
 
 router.get('/notification', AdminController.getNotification)
 router.post('/notification', AdminController.postNotification)
+router.get('/delete-notification/:id', AdminController.deleteNotification)
 
-// router.get('/post/add', AdminController.getAddPost);
-// router.post('/post/add', AdminController.postAddPost);
-
+router.get('/post', AdminController.getPost)
+router.get('/delete-post/:id', AdminController.deletePost)
 
 module.exports = router;

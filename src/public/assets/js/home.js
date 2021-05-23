@@ -100,8 +100,10 @@ $(document).on("click", ".post-comment", function () {
     axios.get('/post/' + post).then(result => {
         const post = result.data.data.post;
         const comments = result.data.data.comments;
+        const user = result.data.data.user;
         comments.map(element => {
-            $('.data-info').append(`
+            if(element.user._id == user._id) {
+                $('.data-info').append(`
                                 <div class="data-info-with-button" id="`+ element._id + `">
 
                                     <div class="data-info-detail">
@@ -124,6 +126,20 @@ $(document).on("click", ".post-comment", function () {
                                         </div>
                                     </div>
                                 </div>`)
+            } else {
+                $('.data-info').append(`
+                                <div class="data-info-with-button" id="`+ element._id + `">
+
+                                    <div class="data-info-detail">
+                                        <img src="`+ element.user.image + `" alt="" class="rounded-circle" width="40" height="40"> 
+                                        <div> 
+                                            <h6>`+ element.user.full_name + `</h6>
+                                            <div>`+ element.comment + `</div>
+                                        </div>
+                                    </div>
+                                </div>`)
+            }
+            
         })
 
     }).catch(err => {
